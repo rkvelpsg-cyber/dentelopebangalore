@@ -26,6 +26,7 @@ export interface TreatmentData {
   label: string;
   tagline: string;
   heroDesc: string;
+  heroImage: string;
   price: string;
   duration: string;
   sessions: string;
@@ -45,6 +46,8 @@ export const TREATMENT_DATA: TreatmentData[] = [
     heroDesc:
       "Professional scaling and polishing to remove plaque, tartar and stains — the foundation of lifelong oral health.",
     price: "₹500",
+    heroImage:
+      "https://images.unsplash.com/photo-1606811841689-23dfddce3e8b?w=800&h=600&fit=crop&auto=format",
     duration: "45–60 min",
     sessions: "1",
     painLevel: "None",
@@ -112,6 +115,8 @@ export const TREATMENT_DATA: TreatmentData[] = [
     heroDesc:
       "Professional laser whitening up to 8 shades lighter — safe, fast and long-lasting results with zero enamel damage.",
     price: "₹3,500",
+    heroImage:
+      "https://images.unsplash.com/photo-1595956553066-fe24a8c33395?w=800&h=600&fit=crop&auto=format",
     duration: "60–90 min",
     sessions: "1",
     painLevel: "Minimal",
@@ -179,6 +184,8 @@ export const TREATMENT_DATA: TreatmentData[] = [
     heroDesc:
       "Titanium implants that function, feel and look like real teeth — the gold standard for replacing missing teeth.",
     price: "₹18,000",
+    heroImage:
+      "https://images.unsplash.com/photo-1629909615184-74f495363b67?w=800&h=600&fit=crop&auto=format",
     duration: "1–2 hrs (placement)",
     sessions: "3–4 visits",
     painLevel: "Low (anaesthesia)",
@@ -246,6 +253,8 @@ export const TREATMENT_DATA: TreatmentData[] = [
     heroDesc:
       "Metal, ceramic and clear aligner options — tailored orthodontic treatment by MDS specialists for all ages.",
     price: "₹22,000",
+    heroImage:
+      "https://images.unsplash.com/photo-1655807226773-59c8e18a80de?w=800&h=600&fit=crop&auto=format",
     duration: "18–24 months avg.",
     sessions: "Monthly check-ins",
     painLevel: "Mild (adjustment days)",
@@ -313,6 +322,8 @@ export const TREATMENT_DATA: TreatmentData[] = [
     heroDesc:
       "Painless rotary RCT by endodontists — preserve your natural tooth and get back to normal life the same day.",
     price: "₹4,500",
+    heroImage:
+      "https://images.unsplash.com/photo-1588776814546-1ffbb9b8c068?w=800&h=600&fit=crop&auto=format",
     duration: "60–90 min",
     sessions: "1–2",
     painLevel: "None (anaesthesia)",
@@ -385,6 +396,7 @@ export const TREATMENT_DATA: TreatmentData[] = [
     heroDesc:
       "A customised combination of veneers, crowns, whitening and contouring — crafted to your facial features.",
     price: "₹8,000+",
+    heroImage: "/images/smilemakeover.png",
     duration: "2–4 weeks",
     sessions: "3–5",
     painLevel: "Minimal",
@@ -452,6 +464,7 @@ export const TREATMENT_DATA: TreatmentData[] = [
     heroDesc:
       "Child-friendly specialists, a fun clinic environment and gentle techniques to give your child a fearless dental experience.",
     price: "₹400",
+    heroImage: "/images/kidsdentisrty.png",
     duration: "30–45 min",
     sessions: "As needed",
     painLevel: "None",
@@ -519,6 +532,7 @@ export const TREATMENT_DATA: TreatmentData[] = [
     heroDesc:
       "Advanced periodontal therapy to reverse gum disease, reduce inflammation and protect your teeth for life.",
     price: "₹1,200",
+    heroImage: "/images/gumtreatment.png",
     duration: "45–90 min",
     sessions: "2–4",
     painLevel: "Mild",
@@ -586,6 +600,7 @@ export const TREATMENT_DATA: TreatmentData[] = [
     heroDesc:
       "Simple and surgical extractions including wisdom teeth — performed under effective anaesthesia by oral surgeons.",
     price: "₹600",
+    heroImage: "/images/toothextractions.png",
     duration: "20–60 min",
     sessions: "1",
     painLevel: "None (anaesthesia)",
@@ -653,6 +668,7 @@ export const TREATMENT_DATA: TreatmentData[] = [
     heroDesc:
       "Porcelain and zirconia restorations crafted to perfection — restore damaged teeth and transform your smile.",
     price: "₹6,000",
+    heroImage: "/images/veneerscrowns.png",
     duration: "2 visits",
     sessions: "2",
     painLevel: "Minimal",
@@ -709,6 +725,384 @@ export const TREATMENT_DATA: TreatmentData[] = [
       {
         q: "How do I care for veneers?",
         a: "Brush twice daily with non-abrasive toothpaste, floss daily and wear a night guard if you clench or grind. Avoid biting nails or hard objects with veneer teeth.",
+      },
+    ],
+    popular: false,
+  },
+  {
+    slug: "dental-bridges",
+    label: "Dental Bridges",
+    tagline: "Bridge the Gap, Restore Your Smile",
+    heroDesc:
+      "Natural-looking fixed prosthetics that replace one or more missing teeth — restoring function, appearance and confidence.",
+    price: "",
+    heroImage: "/images/dentalbridge.png",
+    duration: "2 visits",
+    sessions: "2",
+    painLevel: "Minimal",
+    overview:
+      "A dental bridge is a fixed prosthetic that literally bridges the gap created by one or more missing teeth. It consists of two crowns on the teeth adjacent to the gap (abutment teeth) and a false tooth (pontic) in between. At Dentelope we use high-strength porcelain-fused-to-zirconia and full-zirconia materials for a lifelike appearance and lasting durability.",
+    benefits: [
+      "Restores ability to chew and speak properly",
+      "Maintains the shape of your face",
+      "Prevents remaining teeth from drifting",
+      "Fixed solution — no removal required",
+      "Looks and feels like natural teeth",
+      "Completed in just two visits",
+    ],
+    steps: [
+      {
+        step: 1,
+        title: "Consultation & Planning",
+        desc: "Digital X-rays and impressions are taken to assess bone health and plan the bridge design.",
+      },
+      {
+        step: 2,
+        title: "Abutment Preparation",
+        desc: "Adjacent teeth are gently reshaped to accommodate the crowns that will anchor the bridge.",
+      },
+      {
+        step: 3,
+        title: "Temporary Bridge",
+        desc: "A temporary bridge is placed to protect the prepared teeth while the permanent one is fabricated.",
+      },
+      {
+        step: 4,
+        title: "Bridge Placement",
+        desc: "The custom-made permanent bridge is checked for fit, bite and aesthetics, then permanently cemented.",
+      },
+    ],
+    faqs: [
+      {
+        q: "How long does a dental bridge last?",
+        a: "With proper care, a porcelain or zirconia bridge typically lasts 10–15 years or longer.",
+      },
+      {
+        q: "Is the procedure painful?",
+        a: "The procedure is done under local anaesthesia. You may feel mild sensitivity for a few days afterwards.",
+      },
+      {
+        q: "How do I clean a dental bridge?",
+        a: "Use a floss threader or interdental brush to clean under the pontic daily, in addition to regular brushing.",
+      },
+      {
+        q: "Is a bridge better than an implant?",
+        a: "Implants are the gold standard for single tooth replacement, but bridges are a faster and more affordable option when adjacent teeth already need crowns.",
+      },
+    ],
+    popular: false,
+  },
+  {
+    slug: "dentures",
+    label: "Dentures",
+    tagline: "Complete Smile Restoration",
+    heroDesc:
+      "Custom full, partial and cast metal dentures crafted for a comfortable fit and a natural appearance — restoring your smile and confidence.",
+    price: "",
+    heroImage: "/images/dentures.png",
+    duration: "3–5 visits",
+    sessions: "4",
+    painLevel: "None",
+    overview:
+      "Dentures are removable prosthetic devices used to replace missing teeth. Dentelope offers full dentures (for patients with no remaining teeth), partial dentures (to replace several missing teeth), and cast metal dentures (a stronger, thinner framework that uses existing teeth for support). All are custom-designed for a precise fit.",
+    benefits: [
+      "Restores chewing efficiency and speech clarity",
+      "Supports facial muscles to prevent sagging",
+      "Removable for easy cleaning and maintenance",
+      "Multiple material options to suit your budget",
+      "Custom shaded to match your natural teeth",
+      "Improved quality of life and self-confidence",
+    ],
+    steps: [
+      {
+        step: 1,
+        title: "Initial Impressions",
+        desc: "Primary impressions of the jaws are taken to create custom trays for more precise secondary impressions.",
+      },
+      {
+        step: 2,
+        title: "Jaw Relationship Recording",
+        desc: "Bite registration and jaw relationship are recorded to ensure correct vertical dimension and aesthetics.",
+      },
+      {
+        step: 3,
+        title: "Try-In Stage",
+        desc: "Wax dentures with teeth set in place are tried for fit, bite, appearance and phonetics before finalisation.",
+      },
+      {
+        step: 4,
+        title: "Delivery & Adjustments",
+        desc: "The finished dentures are delivered. Minor adjustments are made at follow-up visits for optimal comfort.",
+      },
+    ],
+    faqs: [
+      {
+        q: "How long does it take to get used to dentures?",
+        a: "Most patients adapt within 4–8 weeks. Speech and eating improve significantly within the first month.",
+      },
+      {
+        q: "Can I sleep with my dentures?",
+        a: "It is recommended to remove dentures at night to give gum tissue time to rest and recover.",
+      },
+      {
+        q: "How do I clean dentures?",
+        a: "Remove and rinse after eating, brush with a soft denture brush, and soak overnight in a denture-cleaning solution.",
+      },
+      {
+        q: "Will dentures affect my speech?",
+        a: "Initially there may be a slight adjustment period. Practising speaking and reading aloud speeds up adaptation.",
+      },
+    ],
+    popular: false,
+  },
+  {
+    slug: "tooth-fillings",
+    label: "Tooth Fillings",
+    tagline: "Repair Cavities, Restore Natural Beauty",
+    heroDesc:
+      "Tooth-colored composite resin fillings that blend seamlessly with your natural teeth — durable, mercury-free and completed in a single visit.",
+    price: "",
+    heroImage: "/images/toothfilling.png",
+    duration: "30–60 min",
+    sessions: "1",
+    painLevel: "Minimal",
+    overview:
+      "Tooth-colored composite fillings are used to restore teeth damaged by cavities, cracks or minor chips. Unlike old amalgam fillings, composite resin is metal-free and can be precisely shade-matched to your natural tooth color. The material bonds directly to the tooth structure, requiring minimal removal of healthy enamel.",
+    benefits: [
+      "Invisible — matches your natural tooth color perfectly",
+      "Mercury-free and biocompatible material",
+      "Minimal tooth preparation required",
+      "Bonds to tooth structure, strengthening it",
+      "Completed in a single appointment",
+      "Can also repair chipped or cracked teeth",
+    ],
+    steps: [
+      {
+        step: 1,
+        title: "Shade Selection",
+        desc: "The composite shade is matched to your natural tooth color using a shade guide.",
+      },
+      {
+        step: 2,
+        title: "Decay Removal",
+        desc: "The decayed portion of the tooth is removed under local anaesthesia, and the cavity is cleaned.",
+      },
+      {
+        step: 3,
+        title: "Bonding & Layering",
+        desc: "A bonding agent is applied, and the composite is placed in layers, each hardened with a curing light.",
+      },
+      {
+        step: 4,
+        title: "Shaping & Polishing",
+        desc: "The filling is shaped to match your bite and polished to a smooth finish for comfort and aesthetics.",
+      },
+    ],
+    faqs: [
+      {
+        q: "How long do composite fillings last?",
+        a: "Composite fillings typically last 7–10 years with proper oral hygiene and regular check-ups.",
+      },
+      {
+        q: "Is the procedure painful?",
+        a: "Local anaesthesia is used, so you will feel no pain during the procedure. Mild sensitivity may occur for a day or two.",
+      },
+      {
+        q: "Can old amalgam fillings be replaced with composite?",
+        a: "Yes. Many patients choose to replace silver amalgam fillings with tooth-colored composite for aesthetic and health reasons.",
+      },
+      {
+        q: "How do I care for a new filling?",
+        a: "Avoid very hard or sticky foods for 24 hours. Maintain regular brushing and flossing to prolong the life of the filling.",
+      },
+    ],
+    popular: false,
+  },
+  {
+    slug: "wisdom-tooth-surgery",
+    label: "Wisdom Tooth Surgery",
+    tagline: "Painless Wisdom Tooth Removal",
+    heroDesc:
+      "Precision surgical extraction of impacted or problematic wisdom teeth — safe, quick and with minimal post-operative discomfort.",
+    price: "",
+    heroImage: "/images/wisdomtooth.png",
+    duration: "30–60 min",
+    sessions: "1",
+    painLevel: "Managed",
+    overview:
+      "Wisdom teeth (third molars) often lack sufficient space to erupt properly, leading to impaction, crowding, pain, infection or cyst formation. Our oral surgeons perform both simple and surgical extractions using advanced techniques that minimize trauma to surrounding tissue, ensuring faster healing and less post-operative discomfort.",
+    benefits: [
+      "Eliminates pain, swelling and infection caused by impaction",
+      "Prevents damage to adjacent teeth",
+      "Reduces risk of cyst or tumour formation",
+      "Performed under local or conscious sedation",
+      "Minimally invasive technique for faster recovery",
+      "Same-day discharge in most cases",
+    ],
+    steps: [
+      {
+        step: 1,
+        title: "X-Ray & Assessment",
+        desc: "An OPG or CBCT scan is taken to assess the position, angulation and depth of the wisdom tooth.",
+      },
+      {
+        step: 2,
+        title: "Anaesthesia",
+        desc: "Local anaesthesia (or IV sedation upon request) is administered to ensure a completely pain-free experience.",
+      },
+      {
+        step: 3,
+        title: "Surgical Extraction",
+        desc: "The tooth is carefully sectioned if necessary and removed with minimal bone disturbance.",
+      },
+      {
+        step: 4,
+        title: "Closure & Care",
+        desc: "The socket is irrigated, sutured if needed, and post-operative care instructions are provided.",
+      },
+    ],
+    faqs: [
+      {
+        q: "How long is the recovery?",
+        a: "Most patients resume normal activities within 2–3 days. Complete healing takes 1–2 weeks.",
+      },
+      {
+        q: "What can I eat after wisdom tooth removal?",
+        a: "Soft foods like yoghurt, soups, mashed potatoes and smoothies for the first 3–5 days. Avoid hard, crunchy foods.",
+      },
+      {
+        q: "Is wisdom tooth removal necessary?",
+        a: "Not always. Removal is recommended when the tooth is impacted, infected, causing crowding or associated with a cyst.",
+      },
+      {
+        q: "Will I be awake during the procedure?",
+        a: "Yes, under local anaesthesia you are awake but feel no pain. Sedation is available for anxious patients.",
+      },
+    ],
+    popular: false,
+  },
+  {
+    slug: "laser-gum-surgery",
+    label: "Laser Gum Surgery",
+    tagline: "Healthier Gums, Minimal Discomfort",
+    heroDesc:
+      "Advanced laser-assisted periodontal therapy that treats gum disease precisely and gently — with faster healing and no scalpel required.",
+    price: "",
+    heroImage: "/images/lasergumsurgery.png",
+    duration: "60–90 min",
+    sessions: "1–2",
+    painLevel: "Minimal",
+    overview:
+      "Laser gum surgery uses a focused beam of light energy to remove infected gum tissue, sterilise periodontal pockets and stimulate regeneration of healthy tissue. Compared to traditional gum surgery, laser therapy causes significantly less bleeding, swelling and post-operative discomfort, with most patients returning to normal activities the same day.",
+    benefits: [
+      "Minimally invasive — no scalpel or stitches in most cases",
+      "Precisely targets infected tissue without harming healthy gum",
+      "Kills bacteria in periodontal pockets for deeper sterilisation",
+      "Significantly less bleeding and post-operative swelling",
+      "Faster healing compared to traditional surgery",
+      "Stimulates regeneration of bone and gum tissue",
+    ],
+    steps: [
+      {
+        step: 1,
+        title: "Periodontal Assessment",
+        desc: "Probing depths, X-rays and intraoral photos are taken to map the extent of gum disease.",
+      },
+      {
+        step: 2,
+        title: "Scaling & Root Planing",
+        desc: "Ultrasonic instruments remove tartar and biofilm from root surfaces above and below the gum line.",
+      },
+      {
+        step: 3,
+        title: "Laser Treatment",
+        desc: "A diode or Nd:YAG laser is precisely directed into each periodontal pocket to remove infected tissue and sterilise.",
+      },
+      {
+        step: 4,
+        title: "Review & Maintenance",
+        desc: "A review appointment at 4–6 weeks assesses healing; a maintenance schedule is established to prevent recurrence.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Does laser gum surgery hurt?",
+        a: "Local anaesthesia is applied. Most patients report significantly less discomfort compared to traditional surgery.",
+      },
+      {
+        q: "How many sessions are needed?",
+        a: "Mild to moderate gum disease typically requires 1–2 sessions. Severe cases may need additional treatments.",
+      },
+      {
+        q: "How soon can I eat after the procedure?",
+        a: "Soft foods are recommended for 24–48 hours. Avoid hot, spicy or hard foods for a few days.",
+      },
+      {
+        q: "Is laser gum surgery safe?",
+        a: "Yes. Dental lasers are FDA-approved and have been used safely in periodontal treatment for over two decades.",
+      },
+    ],
+    popular: false,
+  },
+  {
+    slug: "implant-dentures",
+    label: "Implant Dentures",
+    tagline: "Secure, Natural-Feeling Dentures",
+    heroDesc:
+      "Implant-supported dentures that snap securely onto dental implants — eliminating slipping and restoring full chewing confidence.",
+    price: "",
+    heroImage: "/images/implantdentures.png",
+    duration: "Multiple visits",
+    sessions: "4–6",
+    painLevel: "Managed",
+    overview:
+      "Implant dentures (overdentures) are removable or fixed prosthetics anchored by 2–6 dental implants placed in the jawbone. Unlike conventional dentures, they cannot slip or shift during eating or speaking. The implants also stimulate the jawbone, preventing the bone loss that typically occurs with traditional dentures.",
+    benefits: [
+      "Anchored securely — no slipping or clicking",
+      "Restore full chewing efficiency (up to 70% better than conventional dentures)",
+      "Preserve jawbone by stimulating it like natural tooth roots",
+      "More comfortable — reduced gum pressure",
+      "Improved speech and confidence",
+      "Removable versions are easy to clean",
+    ],
+    steps: [
+      {
+        step: 1,
+        title: "Consultation & Planning",
+        desc: "CBCT scan assesses bone volume. A treatment plan is created detailing implant number, position and prosthesis type.",
+      },
+      {
+        step: 2,
+        title: "Implant Placement",
+        desc: "2–6 titanium implants are surgically placed into the jawbone under local anaesthesia or sedation.",
+      },
+      {
+        step: 3,
+        title: "Healing Period",
+        desc: "Implants are allowed to osseointegrate (fuse with bone) over 3–6 months. A temporary prosthesis is worn.",
+      },
+      {
+        step: 4,
+        title: "Prosthesis Attachment",
+        desc: "The custom overdenture is connected to the implants via ball attachments or locator systems, and fit is verified.",
+      },
+    ],
+    faqs: [
+      {
+        q: "How many implants are needed for implant dentures?",
+        a: "Typically 2–4 implants for a lower overdenture and 4–6 for an upper, depending on bone quality and prosthesis design.",
+      },
+      {
+        q: "Are implant dentures removable?",
+        a: "Most overdentures are removable by the patient for cleaning, while fixed implant bridges require professional removal.",
+      },
+      {
+        q: "How long do implant dentures last?",
+        a: "The implants can last a lifetime with proper care. The denture prosthesis may need replacement every 5–10 years.",
+      },
+      {
+        q: "Am I a candidate for implant dentures?",
+        a: "Most patients with adequate bone volume and good general health are candidates. A CBCT scan determines eligibility.",
       },
     ],
     popular: false,

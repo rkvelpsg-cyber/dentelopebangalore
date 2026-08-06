@@ -33,6 +33,7 @@ import Link from "next/link";
 import { ImageWithFallback } from "@/components/ImageWithFallback";
 import { LABEL_TO_SLUG } from "@/app/treatments/treatments-data";
 import HeroCarousel from "@/components/herocarousel";
+import BookingModal from "@/components/BookingModal";
 
 // ── social brand icons (inline SVG) ───────────────────────────────────────────
 function IconFacebook({ className }: { className?: string }) {
@@ -116,20 +117,21 @@ const WHITE = "#ffffff";
 // ── brand ─────────────────────────────────────────────────────────────────────
 const C = {
   name: "Dentelope",
-  phone: "+91 98765 43210",
-  wa: "919876543210",
+  phone: "+91 80737 62560",
+  wa: "918073762560",
   email: "care@dentelope.in",
   address:
     "3 Tsn Babu, Opposite to SBB Sapphire\nVictorian View Layout, Nallurhalli\nWhitefield, Bengaluru \u2013 560 066",
   city: "Whitefield, Bengaluru",
   rating: "4.9",
   reviews: "842",
-  patients: "10,000+",
+  patients: "2,000+",
   years: "12+",
 };
 
 // ── nav ───────────────────────────────────────────────────────────────────────
 const NAV_LINKS = [
+  { label: "About", sub: [] },
   {
     label: "Treatments",
     sub: [
@@ -143,99 +145,126 @@ const NAV_LINKS = [
       "Gum Treatment",
       "Tooth Extraction",
       "Veneers & Crowns",
+      "Dental Bridges",
+      "Dentures",
+      "Tooth Fillings",
+      "Wisdom Tooth Surgery",
+      "Laser Gum Surgery",
+      "Implant Dentures",
     ],
   },
-  { label: "Membership Plans", sub: [] },
-  { label: "Patient Safety", sub: [] },
+  { label: "Patient Speaks", sub: [] },
+  { label: "Dental Blog", sub: [] },
   { label: "Our Doctors", sub: [] },
-  { label: "Find a Clinic", sub: [] },
-  { label: "Instant Callback", sub: [] },
 ];
 
-// ── treatments ────────────────────────────────────────────────────────────────
 const TREATMENTS = [
   {
     icon: Stethoscope,
     label: "Teeth Cleaning",
-    price: "\u20b9500",
     desc: "Scaling, polishing & oral hygiene assessment.",
     popular: false,
   },
   {
     icon: Sparkles,
     label: "Teeth Whitening",
-    price: "\u20b93,500",
-    desc: "Laser whitening \u2014 brighter smile in one visit.",
+    desc: "Laser whitening — brighter smile in one visit.",
     popular: true,
   },
   {
     icon: Layers,
     label: "Dental Implants",
-    price: "\u20b918,000",
     desc: "Titanium implants that look & feel natural.",
     popular: true,
   },
   {
     icon: Zap,
     label: "Braces / Aligners",
-    price: "\u20b922,000",
     desc: "Metal, ceramic & Invisalign by MDS specialists.",
     popular: true,
   },
   {
     icon: Heart,
     label: "Root Canal (RCT)",
-    price: "\u20b94,500",
-    desc: "Painless rotary RCT \u2014 save your natural tooth.",
+    desc: "Painless rotary RCT — save your natural tooth.",
     popular: true,
   },
   {
     icon: Award,
     label: "Smile Makeover",
-    price: "\u20b98,000",
     desc: "Veneers, crowns & bonding for your dream smile.",
     popular: false,
   },
   {
     icon: Baby,
     label: "Kids Dentistry",
-    price: "\u20b9400",
     desc: "Child-friendly specialists. Zero fear, healthy teeth.",
     popular: false,
   },
   {
     icon: Shield,
     label: "Gum Treatment",
-    price: "\u20b91,200",
     desc: "Scaling, root planing & periodontal therapy.",
     popular: false,
   },
   {
     icon: Stethoscope,
     label: "Tooth Extraction",
-    price: "\u20b9600",
     desc: "Painless extractions incl. wisdom teeth, same-day.",
     popular: false,
   },
   {
     icon: Sparkles,
     label: "Veneers & Crowns",
-    price: "\u20b96,000",
     desc: "Porcelain & zirconia restorations crafted to perfection.",
     popular: false,
   },
   {
     icon: Zap,
     label: "Digital X-Rays",
-    price: "\u20b9300",
     desc: "90% less radiation. Instant digital results.",
     popular: false,
   },
   {
     icon: Award,
     label: "Sedation Dentistry",
-    price: "On consult",
     desc: "Anxiety-free dentistry with oral or IV sedation.",
+    popular: false,
+  },
+  {
+    icon: Layers,
+    label: "Dental Bridges",
+    desc: "Natural-looking prosthetics bridging the gap of missing teeth.",
+    popular: false,
+  },
+  {
+    icon: Download,
+    label: "Dentures",
+    desc: "Full, partial & cast dentures for complete smile restoration.",
+    popular: false,
+  },
+  {
+    icon: Shield,
+    label: "Tooth Fillings",
+    desc: "Tooth-colored composite fillings to repair cavities & decay.",
+    popular: false,
+  },
+  {
+    icon: Zap,
+    label: "Wisdom Tooth Surgery",
+    desc: "Precision removal of impacted wisdom teeth, same-day procedure.",
+    popular: false,
+  },
+  {
+    icon: Heart,
+    label: "Laser Gum Surgery",
+    desc: "Minimally invasive laser periodontal therapy with fast healing.",
+    popular: false,
+  },
+  {
+    icon: Sparkles,
+    label: "Implant Dentures",
+    desc: "Implant-supported dentures for a secure, natural everyday feel.",
     popular: false,
   },
 ];
@@ -243,34 +272,34 @@ const TREATMENTS = [
 // ── why us ────────────────────────────────────────────────────────────────────
 const WHY = [
   {
-    icon: "\ud83d\udc89",
-    title: "Pain-Free Procedures",
-    desc: "Computer-controlled anaesthesia makes even root canals feel effortless.",
+    icon: "🦷",
+    title: "Comprehensive Dental Services",
+    desc: "We offer a full spectrum of dental care — from routine cleanings and digital X-rays to advanced procedures like dental implants, root canals, laser gum surgery and smile makeovers. Whatever your dental need, our specialists handle it under one roof in Whitefield, Bengaluru.",
   },
   {
-    icon: "\ud83c\udf93",
-    title: "MDS Specialists Only",
-    desc: "Every procedure by a post-graduate specialist. Never a junior or trainee.",
+    icon: "🎓",
+    title: "Experienced & Dedicated Team",
+    desc: "Our team consists of MDS-qualified specialists — endodontists, orthodontists, implantologists, periodontists and paediatric dentists — who are passionate about exceptional care. Every procedure is performed by a post-graduate specialist. Never a junior or trainee.",
   },
   {
-    icon: "\ud83c\udfc5",
-    title: "ISO 9001 Certified",
-    desc: "NABH-compliant sterilisation, quarterly independent safety audits.",
+    icon: "🔬",
+    title: "State-of-the-Art Technology",
+    desc: "We invest in the latest dental technology to enhance accuracy and comfort. From 3D CBCT scans and intraoral cameras to laser dentistry and CAD/CAM zirconia crowns, we leverage cutting-edge tools to deliver superior results and minimise treatment time.",
   },
   {
-    icon: "\ud83d\udcf8",
-    title: "3D Digital Precision",
-    desc: "CBCT scans, intraoral cameras & AI diagnostics for predictable results.",
+    icon: "📋",
+    title: "Personalised Treatment Plans",
+    desc: "Every patient is unique, which is why we take time to listen to your concerns and goals before crafting a customised treatment plan. Whether you need preventive care or a complete smile transformation, we create a clear roadmap tailored to your needs and budget.",
   },
   {
-    icon: "\ud83d\udcb3",
-    title: "0% EMI Available",
-    desc: "No-cost EMI for 3\u201324 months via HDFC, BajajFinserv, ZestMoney.",
+    icon: "🏅",
+    title: "Safe & Hygienic Environment",
+    desc: "Dentelope is ISO 9001 certified with NABH-compliant sterilisation protocols and quarterly independent safety audits. Our clinic uses hospital-grade autoclaves, single-use instruments and barrier protocols — so you can visit with complete peace of mind.",
   },
   {
-    icon: "\ud83d\udccb",
-    title: "Transparent Pricing",
-    desc: "Full cost breakdown before any procedure begins. No surprise bills.",
+    icon: "💬",
+    title: "Commitment to Patient Education",
+    desc: "We believe informed patients make better decisions. Our team takes time to explain your diagnosis, treatment options and preventive steps in plain language. We are always available to answer your questions and ensure you feel confident about your dental health journey.",
   },
 ];
 
@@ -378,7 +407,7 @@ const FAQS = [
   },
   {
     q: "How do I book an appointment?",
-    a: "Use the form on this page, call/WhatsApp +91 98765 43210, or walk in. Same-day slots available for most non-surgical treatments.",
+    a: "Use the form on this page, call/WhatsApp +91 80737 62560, or walk in. Same-day slots available for most non-surgical treatments.",
   },
   {
     q: "What are your clinic timings?",
@@ -518,7 +547,7 @@ function BookingForm({ compact = false }: { compact?: boolean }) {
         <input
           type="tel"
           required
-          placeholder="+91 98765 43210"
+          placeholder="+91 80737 62560"
           className={inputCls}
           value={form.phone}
           onChange={(e) => setForm({ ...form, phone: e.target.value })}
@@ -537,7 +566,7 @@ function BookingForm({ compact = false }: { compact?: boolean }) {
             {TREATMENTS.map((t) => (
               <option key={t.label}>{t.label}</option>
             ))}
-            <option>Not Sure \u2014 Need Advice</option>
+            <option>Not Sure — Need Advice</option>
           </select>
           <ChevronDown className="w-4 h-4 text-gray-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
         </div>
@@ -563,7 +592,7 @@ function BookingForm({ compact = false }: { compact?: boolean }) {
         <Calendar className="w-4 h-4" /> Book FREE Appointment
       </button>
       <p className="text-center text-xs text-gray-400">
-        No charges \u00b7 First consultation free \u00b7 Quick response
+        No charges · First consultation free · Quick response
       </p>
     </form>
   );
@@ -571,43 +600,27 @@ function BookingForm({ compact = false }: { compact?: boolean }) {
 
 // ── features strip ────────────────────────────────────────────────────────────
 function FeaturesStrip() {
-  const items = [
-    {
-      icon: "\ud83d\udc89",
-      label: "Pain-Free Care",
-      sub: "Computer-controlled anaesthesia",
-    },
-    {
-      icon: "\ud83c\udf93",
-      label: "MDS Specialists",
-      sub: "Post-graduate doctors only",
-    },
-    {
-      icon: "\ud83c\udfc5",
-      label: "ISO 9001 Certified",
-      sub: "NABH-compliant clinic",
-    },
-    {
-      icon: "\ud83d\udcb3",
-      label: "0% EMI",
-      sub: "Up to 24 months, zero cost",
-    },
-    {
-      icon: "\ud83c\udd93",
-      label: "Free Consultation",
-      sub: "First visit at no charge",
-    },
-    {
-      icon: "\ud83d\udccb",
-      label: "Transparent Pricing",
-      sub: "No hidden fees, ever",
-    },
-  ];
   return (
     <div style={{ background: WHITE, borderBottom: "1px solid #efe5cc" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          {items.map((item, i) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          {[
+            {
+              icon: "\ud83d\udc89",
+              label: "Pain-Free Care",
+              sub: "Computer-controlled anaesthesia",
+            },
+            {
+              icon: "\ud83c\udf93",
+              label: "MDS Specialists",
+              sub: "Post-graduate doctors only",
+            },
+            {
+              icon: "\ud83d\udccb",
+              label: "Transparent Pricing",
+              sub: "No hidden fees, ever",
+            },
+          ].map((item, i) => (
             <div
               key={i}
               className="flex flex-col items-center text-center gap-1.5 py-3 px-2 rounded-2xl cursor-pointer transition-all"
@@ -630,6 +643,38 @@ function FeaturesStrip() {
               </p>
             </div>
           ))}
+          {/* Google rating item */}
+          <div className="flex flex-col items-center text-center gap-1.5 py-3 px-2 rounded-2xl">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/120px-Google_%22G%22_logo.svg.png"
+              alt="Google"
+              className="h-5 opacity-80"
+            />
+            <div className="flex items-center gap-1">
+              <span
+                className="font-extrabold text-sm text-gray-900"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                5.0
+              </span>
+              <Stars count={5} size={4} />
+            </div>
+            <p className="text-[10px] text-gray-400">Google Rating</p>
+          </div>
+          {/* patients stat item */}
+          <div className="flex flex-col items-center text-center gap-1.5 py-3 px-2 rounded-2xl">
+            <span className="text-2xl">👥</span>
+            <p
+              className="font-bold text-xs text-gray-900 leading-tight"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              2,000+
+            </p>
+            <p className="text-[10px] text-gray-400 leading-tight">
+              Patients Treated
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -657,7 +702,7 @@ function TreatmentsCarousel() {
               <span style={{ color: OR }}>Under One Roof</span>
             </h2>
             <p className="mt-2 text-gray-500 text-sm max-w-md leading-relaxed">
-              From a routine cleaning to a complete smile makeover \u2014 every
+              From a routine cleaning to a complete smile makeover — every
               treatment by MDS specialists.
             </p>
           </div>
@@ -670,7 +715,7 @@ function TreatmentsCarousel() {
               <ChevronLeft className="w-4 h-4" />
             </button>
             <span className="text-xs text-gray-400 font-medium">
-              {idx + 1}\u2013{Math.min(idx + cols, TREATMENTS.length)} /{" "}
+              {idx + 1}–{Math.min(idx + cols, TREATMENTS.length)} /{" "}
               {TREATMENTS.length}
             </span>
             <button
@@ -730,10 +775,7 @@ function TreatmentsCarousel() {
                       {t.desc}
                     </p>
                   </div>
-                  <div className="flex items-center justify-between mt-auto pt-2 border-t border-gray-50">
-                    <span className="font-bold text-sm" style={{ color: OR }}>
-                      {t.price}
-                    </span>
+                  <div className="flex items-center justify-end mt-auto pt-2 border-t border-gray-50">
                     <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-orange-400 group-hover:translate-x-0.5 transition-all" />
                   </div>
                 </Link>
@@ -765,6 +807,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openNav, setOpenNav] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
   const [revIdx, setRevIdx] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -781,6 +824,10 @@ export default function Home() {
       className="min-h-screen text-gray-900"
       style={{ background: CREAM2, fontFamily: "Inter, sans-serif" }}
     >
+      <BookingModal
+        isOpen={bookingOpen}
+        onClose={() => setBookingOpen(false)}
+      />
       {/* navbar */}
       <header
         className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${scrolled ? "shadow-md" : ""}`}
@@ -798,7 +845,7 @@ export default function Home() {
             <img
               src="/dentelope_tagline.png"
               alt="Dentelope — Advanced Dental Care"
-              className="h-14 w-auto"
+              className="h-20 w-auto"
             />
           </a>
           <nav className="hidden xl:flex items-center flex-1 text-sm font-medium text-gray-600 justify-center">
@@ -839,13 +886,13 @@ export default function Home() {
             <Search className="w-4 h-4" />
           </button>
           <div className="hidden xl:flex items-center gap-2 shrink-0">
-            <a
-              href="#book"
+            <button
+              onClick={() => setBookingOpen(true)}
               className="flex items-center gap-2 text-sm font-bold text-white px-5 py-2.5 rounded-lg transition hover:opacity-90"
               style={{ background: OR, fontFamily: "Poppins, sans-serif" }}
             >
               <Calendar className="w-4 h-4" /> Book Appointment
-            </a>
+            </button>
             <a
               href={`tel:${C.phone}`}
               className="flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded-lg border transition hover:bg-orange-50"
@@ -904,14 +951,16 @@ export default function Home() {
               </div>
             ))}
             <div className="pt-3 flex flex-col gap-2">
-              <a
-                href="#book"
-                onClick={() => setMenuOpen(false)}
+              <button
+                onClick={() => {
+                  setBookingOpen(true);
+                  setMenuOpen(false);
+                }}
                 className="flex items-center justify-center gap-2 text-sm font-bold text-white py-3 rounded-xl w-full"
                 style={{ background: OR }}
               >
                 <Calendar className="w-4 h-4" /> Book Appointment
-              </a>
+              </button>
               <a
                 href={`tel:${C.phone}`}
                 className="flex items-center justify-center gap-2 text-sm font-semibold py-3 rounded-xl border w-full"
@@ -927,187 +976,120 @@ export default function Home() {
       <HeroCarousel />
       <FeaturesStrip />
 
-      {/* google rating bar */}
-      <div style={{ background: WHITE, borderBottom: "1px solid #efe5cc" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-5">
-          <div className="flex items-center gap-4">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/120px-Google_%22G%22_logo.svg.png"
-              alt="Google"
-              className="h-6 opacity-80"
-            />
-            <div>
-              <div className="flex items-center gap-2">
-                <span
-                  className="font-extrabold text-2xl text-gray-900"
+      <TreatmentsCarousel />
+
+      {/* about */}
+      <section id="about" className="py-20" style={{ background: WHITE }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid lg:grid-cols-2 gap-14 items-center">
+            {/* image side */}
+            <div className="relative">
+              <div className="rounded-3xl overflow-hidden shadow-xl">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://images.unsplash.com/photo-1629909615184-74f495363b67?w=800&h=700&fit=crop&auto=format"
+                  alt="Dentelope Clinic Interior"
+                  className="w-full h-[480px] object-cover"
+                />
+              </div>
+              {/* floating stat card */}
+              <div className="absolute -bottom-5 -right-5 bg-white rounded-2xl px-6 py-4 shadow-xl border border-orange-50 hidden sm:block">
+                <p
+                  className="text-3xl font-extrabold"
+                  style={{ color: OR, fontFamily: "Poppins, sans-serif" }}
+                >
+                  2,000+
+                </p>
+                <p className="text-xs text-gray-500 font-medium mt-0.5">
+                  Happy Patients
+                </p>
+              </div>
+              {/* floating patients card */}
+              <div className="absolute -top-5 -left-5 bg-white rounded-2xl px-6 py-4 shadow-xl border border-orange-50 hidden sm:block">
+                <p
+                  className="text-3xl font-extrabold"
+                  style={{ color: OR, fontFamily: "Poppins, sans-serif" }}
+                >
+                  ISO 9001
+                </p>
+                <p className="text-xs text-gray-500 font-medium mt-0.5">
+                  Certified Clinic
+                </p>
+              </div>
+            </div>
+
+            {/* content side */}
+            <div className="space-y-6">
+              <div>
+                <OrangePill>Our Story</OrangePill>
+                <h2
+                  className="mt-4 text-4xl font-extrabold text-gray-900 leading-tight"
                   style={{ fontFamily: "Poppins, sans-serif" }}
                 >
-                  {C.rating}
-                </span>
-                <Stars count={5} size={5} />
+                  About <span style={{ color: OR }}>Dentelope</span>
+                  <br />
+                  Advanced Dental Care
+                </h2>
               </div>
-              <p className="text-xs text-gray-500">
-                {C.reviews} verified patient reviews
+              <p className="text-gray-600 leading-relaxed">
+                Dentelope Advanced Dental Clinic was born from a vision — to
+                make specialist-grade dental care accessible, comfortable, and
+                completely pain-free for every family in Whitefield, Bengaluru.
+                From day one, we set out to raise the bar: MDS-qualified doctors
+                only, hospital-grade sterilisation, and transparent pricing with
+                no hidden costs.
               </p>
-            </div>
-          </div>
-          <div className="hidden md:flex gap-8">
-            {[
-              { icon: Users, v: C.patients, l: "Patients Treated" },
-              { icon: ThumbsUp, v: C.years + " Yrs", l: "Of Excellence" },
-              { icon: BadgeCheck, v: "15+", l: "Specialist Doctors" },
-            ].map(({ icon: Icon, v, l }) => (
-              <div key={l} className="flex items-center gap-2.5">
-                <div
-                  className="w-9 h-9 rounded-xl flex items-center justify-center"
-                  style={{ background: "#fff0e8" }}
-                >
-                  <Icon className="w-5 h-5" style={{ color: OR }} />
-                </div>
-                <div>
-                  <div
-                    className="font-extrabold text-gray-900 text-base leading-tight"
-                    style={{ fontFamily: "Poppins, sans-serif" }}
-                  >
-                    {v}
-                  </div>
-                  <div className="text-xs text-gray-500">{l}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <a
-            href="#book"
-            className="text-sm font-bold text-white px-5 py-2.5 rounded-xl transition hover:opacity-90 flex items-center gap-2"
-            style={{ background: OR, fontFamily: "Poppins, sans-serif" }}
-          >
-            <Calendar className="w-4 h-4" /> Book Free Consultation
-          </a>
-        </div>
-      </div>
-
-      {/* booking section */}
-      <section id="book" className="py-16" style={{ background: CREAM }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 items-start">
-          <div className="space-y-7">
-            <div>
-              <OrangePill>Whitefield&apos;s Most Trusted Clinic</OrangePill>
-              <h2
-                className="mt-4 text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight"
-                style={{ fontFamily: "Poppins, sans-serif" }}
-              >
-                Best Dental Clinic
-                <br />
-                in <span style={{ color: OR }}>Whitefield</span>
-              </h2>
-              <p className="mt-4 text-gray-600 leading-relaxed text-lg">
-                Advanced, pain-free dentistry by specialist doctors \u2014 from
-                routine check-ups to complete smile transformations. Trusted by{" "}
-                {C.patients} families.
+              <p className="text-gray-600 leading-relaxed">
+                In a short time we have had the privilege of caring for 2,000+
+                patients and counting. Our clinic combines cutting-edge
+                technology — 3D digital X-rays, laser dentistry, AI-assisted
+                diagnostics — with a warm, personal approach. We believe every
+                smile tells a story, and we’re honoured to be part of yours.
               </p>
-            </div>
-            <div className="space-y-3">
-              {[
-                { icon: MapPin, l: "Our Location", v: C.address },
-                {
-                  icon: Clock,
-                  l: "Working Hours",
-                  v: "Mon\u2013Sat: 9:00 AM \u2013 8:00 PM\nSunday: 10:00 AM \u2013 2:00 PM",
-                },
-                { icon: Phone, l: "Phone & WhatsApp", v: C.phone },
-              ].map(({ icon: Icon, l, v }) => (
-                <div
-                  key={l}
-                  className="flex items-start gap-4 bg-white rounded-2xl px-5 py-4 border border-gray-100 shadow-sm"
-                >
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { v: "2,000+", l: "Patients Treated" },
+                  { v: "3+", l: "Specialist Doctors" },
+                  { v: "ISO 9001", l: "Certified Clinic" },
+                  { v: "NABH", l: "Compliant Sterilisation" },
+                ].map(({ v, l }) => (
                   <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                    style={{ background: "#fff0e8" }}
+                    key={l}
+                    className="rounded-2xl px-5 py-4 border"
+                    style={{ background: "#fff8f2", borderColor: `${OR}20` }}
                   >
-                    <Icon className="w-5 h-5" style={{ color: OR }} />
-                  </div>
-                  <div>
                     <p
-                      className="font-bold text-gray-900 text-sm"
-                      style={{ fontFamily: "Poppins, sans-serif" }}
+                      className="text-2xl font-extrabold"
+                      style={{ color: OR, fontFamily: "Poppins, sans-serif" }}
                     >
-                      {l}
-                    </p>
-                    <p className="text-gray-500 text-sm mt-0.5 whitespace-pre-line">
                       {v}
                     </p>
+                    <p className="text-xs text-gray-500 mt-0.5 font-medium">
+                      {l}
+                    </p>
                   </div>
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <a
-                href={`https://wa.me/${C.wa}`}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-3.5 rounded-xl transition text-sm"
-                style={{ fontFamily: "Poppins, sans-serif" }}
-              >
-                <MessageCircle className="w-4 h-4" /> Chat on WhatsApp
-              </a>
-              <a
-                href={`tel:${C.phone}`}
-                className="flex items-center gap-2 font-bold px-6 py-3.5 rounded-xl border transition text-sm"
-                style={{
-                  color: OR,
-                  borderColor: `${OR}55`,
-                  fontFamily: "Poppins, sans-serif",
-                }}
-              >
-                <Phone className="w-4 h-4" /> Call Now
-              </a>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {[
-                "ISO 9001 Certified",
-                "Pain-Free Tech",
-                "0% EMI",
-                "Free Consultation",
-                "NABH Compliant",
-              ].map((chip) => (
-                <span
-                  key={chip}
-                  className="text-xs font-semibold px-3 py-1.5 rounded-full border"
-                  style={{
-                    background: WHITE,
-                    borderColor: "#e0d0c0",
-                    color: GRAY,
-                  }}
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-3 pt-2">
+                <button
+                  onClick={() => setBookingOpen(true)}
+                  className="flex items-center gap-2 text-sm font-bold text-white px-6 py-3 rounded-xl transition hover:opacity-90"
+                  style={{ background: OR, fontFamily: "Poppins, sans-serif" }}
                 >
-                  \u2713 {chip}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-            <div className="px-6 py-4 border-b" style={{ background: OR }}>
-              <p className="text-white/80 text-xs font-semibold tracking-widest uppercase">
-                \u2726 Zero Cost First Visit \u2726
-              </p>
-              <h3
-                className="text-xl font-extrabold text-white mt-0.5"
-                style={{ fontFamily: "Poppins, sans-serif" }}
-              >
-                Book Your Appointment
-              </h3>
-              <p className="text-white/70 text-xs mt-0.5">
-                Slots fill up fast \u2014 confirm yours today
-              </p>
-            </div>
-            <div className="p-6">
-              <BookingForm />
+                  <Calendar className="w-4 h-4" /> Book Appointment
+                </button>
+                <a
+                  href={`tel:${C.phone}`}
+                  className="flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-xl border transition hover:bg-orange-50"
+                  style={{ color: OR, borderColor: `${OR}55` }}
+                >
+                  <Phone className="w-4 h-4" /> {C.phone}
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
-
-      <TreatmentsCarousel />
 
       {/* why us */}
       <section id="why-us" className="py-20" style={{ background: CREAM }}>
@@ -1130,7 +1112,7 @@ export default function Home() {
                   had anywhere.&rdquo;
                 </p>
                 <p className="text-[10px] text-gray-400 mt-1.5">
-                  \u2014 Kiran D., Whitefield
+                  — Kiran D., Whitefield
                 </p>
               </div>
               <div
@@ -1141,7 +1123,7 @@ export default function Home() {
                   className="text-2xl font-extrabold text-white"
                   style={{ fontFamily: "Poppins, sans-serif" }}
                 >
-                  10,000+
+                  2,000+
                 </div>
                 <div className="text-xs text-white/80 mt-0.5">
                   Smiles Transformed
@@ -1160,37 +1142,39 @@ export default function Home() {
                   <span style={{ color: OR }}>your comfort first</span>
                 </h2>
                 <p className="mt-3 text-gray-500 leading-relaxed">
-                  We built Dentelope on one simple belief \u2014 dental care
-                  should never feel intimidating. Here&apos;s why patients drive
-                  across Bengaluru to visit us.
+                  We built Dentelope on one simple belief — dental care should
+                  never feel intimidating. Here&apos;s why patients drive across
+                  Bengaluru to visit us.
                 </p>
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
                 {WHY.map((w) => (
                   <div
                     key={w.title}
-                    className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:shadow-md hover:border-orange-200 transition-all"
+                    className="group bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:shadow-xl hover:border-orange-300 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 cursor-pointer"
                   >
-                    <span className="text-2xl">{w.icon}</span>
+                    <span className="text-2xl inline-block transition-transform duration-300 group-hover:scale-125">
+                      {w.icon}
+                    </span>
                     <h4
-                      className="font-bold text-gray-900 text-sm mt-2 mb-1"
+                      className="font-bold text-gray-900 text-sm mt-2 mb-1 group-hover:text-orange-500 transition-colors duration-300"
                       style={{ fontFamily: "Poppins, sans-serif" }}
                     >
                       {w.title}
                     </h4>
-                    <p className="text-gray-500 text-xs leading-relaxed">
+                    <p className="text-gray-500 text-sm leading-relaxed">
                       {w.desc}
                     </p>
                   </div>
                 ))}
               </div>
-              <a
-                href="#book"
+              <button
+                onClick={() => setBookingOpen(true)}
                 className="inline-flex items-center gap-2 text-white font-bold px-7 py-4 rounded-xl transition hover:opacity-90 text-sm"
                 style={{ background: OR, fontFamily: "Poppins, sans-serif" }}
               >
-                Book Free Consultation <ArrowRight className="w-4 h-4" />
-              </a>
+                Book Appointment <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
         </div>
@@ -1270,7 +1254,7 @@ export default function Home() {
               <div className="flex items-center gap-2 mt-2">
                 <Stars count={5} size={4} />
                 <span className="text-sm text-gray-500">
-                  {C.rating}/5 \u00b7 {C.reviews} Google reviews
+                  {C.rating}/5 · {C.reviews} Google reviews
                 </span>
               </div>
             </div>
@@ -1326,7 +1310,7 @@ export default function Home() {
                         {r.name}
                       </p>
                       <p className="text-gray-400 text-xs">
-                        {r.treatment} \u00b7 {r.date}
+                        {r.treatment} · {r.date}
                       </p>
                     </div>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -1352,6 +1336,116 @@ export default function Home() {
             >
               Read All {C.reviews} Reviews on Google{" "}
               <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* patient speaks */}
+      <section
+        id="patient-speaks"
+        className="py-20"
+        style={{ background: WHITE }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <OrangePill>Video Testimonials</OrangePill>
+            <h2
+              className="mt-4 text-4xl font-extrabold text-gray-900"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              Patient <span style={{ color: OR }}>Speaks</span>
+            </h2>
+            <p className="mt-3 text-gray-500 text-lg">
+              Hear what our happy patients have to say about their treatments at
+              Dentelope
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
+            {[
+              {
+                name: "Priya Sharma",
+                city: "Bengaluru",
+                treatment: "Teeth Whitening",
+                img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=560&fit=crop&auto=format",
+              },
+              {
+                name: "Rahul Kumar",
+                city: "Whitefield",
+                treatment: "Dental Implants",
+                img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=560&fit=crop&auto=format",
+              },
+              {
+                name: "Meera Nair",
+                city: "Bengaluru",
+                treatment: "Braces / Aligners",
+                img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=560&fit=crop&auto=format",
+              },
+              {
+                name: "Arjun Reddy",
+                city: "Whitefield",
+                treatment: "Root Canal (RCT)",
+                img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=560&fit=crop&auto=format",
+              },
+              {
+                name: "Kavya Patel",
+                city: "Bengaluru",
+                treatment: "Smile Makeover",
+                img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&h=560&fit=crop&auto=format",
+              },
+            ].map(({ name, city, treatment, img }) => (
+              <div key={name} className="flex flex-col gap-3">
+                <div className="relative rounded-2xl overflow-hidden shadow-md group cursor-pointer">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={img}
+                    alt={name}
+                    className="w-full aspect-[5/7] object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  {/* dark gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  {/* play button */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <svg
+                        className="w-5 h-5 translate-x-0.5"
+                        viewBox="0 0 24 24"
+                        fill={OR}
+                      >
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                  {/* name badge */}
+                  <div className="absolute bottom-3 left-3 right-3">
+                    <p className="text-white font-bold text-xs uppercase tracking-wider drop-shadow">
+                      {name}
+                    </p>
+                    <p className="text-white/70 text-[10px] uppercase tracking-widest">
+                      Happy Patient &middot; {treatment}
+                    </p>
+                  </div>
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900 text-sm">{name}</p>
+                  <p className="text-gray-400 text-xs">{city}</p>
+                  <p
+                    className="text-xs font-semibold mt-0.5"
+                    style={{ color: OR }}
+                  >
+                    {treatment}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="flex justify-center mt-10">
+            <a
+              href="#"
+              className="flex items-center gap-2 text-sm font-bold border-b-2 pb-0.5 transition hover:opacity-70"
+              style={{ color: DARK, borderColor: DARK }}
+            >
+              View More <ArrowRight className="w-4 h-4" />
             </a>
           </div>
         </div>
@@ -1386,7 +1480,7 @@ export default function Home() {
             ))}
           </div>
           <p className="text-center text-xs text-gray-400 mt-4">
-            + All major credit cards \u00b7 0% EMI \u00b7 Cashless TPA accepted
+            + All major credit cards · 0% EMI · Cashless TPA accepted
           </p>
         </div>
       </div>
@@ -1636,7 +1730,7 @@ export default function Home() {
                     className="font-extrabold text-gray-900"
                     style={{ fontFamily: "Poppins, sans-serif" }}
                   >
-                    Dentelope \u2014 Whitefield
+                    Dentelope — Whitefield
                   </h4>
                 </div>
                 <p className="text-sm text-gray-500 leading-relaxed pl-12 whitespace-pre-line">
@@ -1668,13 +1762,13 @@ export default function Home() {
                 </div>
               ))}
               <div className="space-y-2 pt-2">
-                <a
-                  href="#book"
-                  className="flex items-center justify-center gap-2 text-white font-bold py-3 rounded-xl transition hover:opacity-90 text-sm"
+                <button
+                  onClick={() => setBookingOpen(true)}
+                  className="flex items-center justify-center gap-2 text-white font-bold py-3 rounded-xl transition hover:opacity-90 text-sm w-full"
                   style={{ background: OR, fontFamily: "Poppins, sans-serif" }}
                 >
                   <Calendar className="w-4 h-4" /> Book Appointment
-                </a>
+                </button>
                 <a
                   href="https://www.google.com/maps/dir/?api=1&destination=Victorian+View+Layout+Nallurhalli+Whitefield+Bengaluru"
                   target="_blank"
@@ -1705,66 +1799,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* final CTA */}
-      <div
-        className="py-14"
-        style={{ background: CREAM2, borderTop: "1px solid #efe5cc" }}
-      >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
-          <div className="flex justify-center">
-            <Stars count={5} size={6} />
-          </div>
-          <h2
-            className="text-3xl lg:text-4xl font-extrabold text-gray-900"
-            style={{ fontFamily: "Poppins, sans-serif" }}
-          >
-            Rated <span style={{ color: OR }}>{C.rating}/5</span> by {C.reviews}
-            + Patients in Bengaluru
-          </h2>
-          <p className="text-gray-500 max-w-lg mx-auto text-sm leading-relaxed">
-            Join over {C.patients} happy patients. Book your free first
-            consultation \u2014 no pressure, no obligations.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="#book"
-              className="flex items-center gap-2 text-white font-extrabold px-8 py-4 rounded-xl transition hover:opacity-90 shadow-lg text-sm"
-              style={{
-                background: OR,
-                fontFamily: "Poppins, sans-serif",
-                boxShadow: `0 8px 24px ${OR}44`,
-              }}
-            >
-              <Calendar className="w-4 h-4" /> Book Free Consultation
-            </a>
-            <a
-              href={`tel:${C.phone}`}
-              className="flex items-center gap-2 font-bold px-8 py-4 rounded-xl border transition hover:bg-orange-50 text-sm"
-              style={{
-                color: OR,
-                borderColor: `${OR}55`,
-                fontFamily: "Poppins, sans-serif",
-              }}
-            >
-              <Phone className="w-4 h-4" /> {C.phone}
-            </a>
-          </div>
-        </div>
-      </div>
-
       {/* footer */}
       <footer style={{ background: "#2a0e00", color: "#c9a98a" }}>
         <div className="w-full px-6 sm:px-10 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-x-10 gap-y-10">
           {/* col 1 — brand + contact */}
-          <div className="lg:col-span-2 space-y-5">
-            <div className="flex items-center gap-3">
+          <div className="lg:col-span-2 space-y-5 flex flex-col items-start">
+            <div className="flex items-center gap-3 pl-4">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/dentelope.svg"
                 alt="Dentelope logo"
-                className="h-16 w-auto shrink-0"
+                className="h-24 w-20 shrink-0 object-contain"
               />
-              <div className="flex flex-col leading-none gap-1">
+              <div className="flex flex-col leading-none gap-1 items-center">
                 <span
                   style={{
                     fontFamily: "Georgia, serif",
@@ -1808,7 +1855,7 @@ export default function Home() {
                 </span>
               </div>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 pl-[108px]">
               <p
                 className="text-xs font-bold uppercase tracking-widest"
                 style={{ color: OR }}
@@ -1832,8 +1879,19 @@ export default function Home() {
                 />
                 {C.email}
               </a>
+              <p
+                className="flex items-start gap-2 text-xs"
+                style={{ color: "#c9a98a" }}
+              >
+                <MapPin
+                  className="w-3.5 h-3.5 shrink-0 mt-0.5"
+                  style={{ color: OR }}
+                />
+                3 TSN Babu, Opposite to SBB Sapphire, Victorian View Layout,
+                Nallurhalli, Whitefield, Bengaluru, Karnataka – 560066
+              </p>
             </div>
-            <div className="flex gap-2.5">
+            <div className="flex gap-2.5 pl-[108px]">
               {(
                 [
                   IconInstagram,
