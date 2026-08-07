@@ -13,6 +13,7 @@ const slides = [
     sub: "Remove plaque, tartar, and stains with a thorough professional clean — the foundation of lasting oral health.",
     cta: "Book a Cleaning",
     ctaSecondary: "Learn More",
+    treatmentHref: "/treatments/teeth-cleaning",
     align: "left",
     accent: "#1a73c8",
   },
@@ -26,6 +27,7 @@ const slides = [
     sub: "Achieve a dazzling smile up to 8 shades brighter with our safe, in-clinic whitening treatments.",
     cta: "Whiten My Smile",
     ctaSecondary: "See Results",
+    treatmentHref: "/treatments/teeth-whitening",
     align: "right",
     accent: "#c87d1a",
   },
@@ -39,6 +41,7 @@ const slides = [
     sub: "Restore missing teeth with titanium implants that look, feel, and function just like natural teeth — for life.",
     cta: "Get a Free Assessment",
     ctaSecondary: "How It Works",
+    treatmentHref: "/treatments/dental-implants",
     align: "left",
     accent: "#1a73c8",
   },
@@ -52,6 +55,7 @@ const slides = [
     sub: "Straighten your smile discreetly and comfortably — traditional braces or invisible aligners tailored to you.",
     cta: "Start Straightening",
     ctaSecondary: "Compare Options",
+    treatmentHref: "/treatments/braces-aligners",
     align: "right",
     accent: "#1a8c5a",
   },
@@ -65,6 +69,7 @@ const slides = [
     sub: "Save your natural tooth with a precise, comfortable root canal procedure. Modern RCT is quick and virtually painless.",
     cta: "Book a Consultation",
     ctaSecondary: "Know More",
+    treatmentHref: "/treatments/root-canal",
     align: "left",
     accent: "#c8471a",
   },
@@ -78,6 +83,7 @@ const slides = [
     sub: "Combine whitening, veneers, and reshaping into one comprehensive plan designed around your unique smile goals.",
     cta: "Design My Smile",
     ctaSecondary: "View Transformations",
+    treatmentHref: "/treatments/smile-makeover",
     align: "center",
     accent: "#8c1ac8",
   },
@@ -91,6 +97,7 @@ const slides = [
     sub: "A friendly, fun environment where children feel safe — building healthy dental habits that last a lifetime.",
     cta: "Book for My Child",
     ctaSecondary: "Our Approach",
+    treatmentHref: "/treatments/kids-dentistry",
     align: "left",
     accent: "#1a8c5a",
   },
@@ -104,6 +111,7 @@ const slides = [
     sub: "Treat gum disease, bleeding gums, and recession with specialized periodontal therapy that protects your smile.",
     cta: "Treat My Gums",
     ctaSecondary: "Learn More",
+    treatmentHref: "/treatments/gum-treatment",
     align: "right",
     accent: "#1a73c8",
   },
@@ -117,6 +125,7 @@ const slides = [
     sub: "When a tooth must go, our gentle technique and local anaesthesia ensure a smooth, stress-free experience.",
     cta: "Get an Appointment",
     ctaSecondary: "What to Expect",
+    treatmentHref: "/treatments/tooth-extraction",
     align: "left",
     accent: "#c8471a",
   },
@@ -130,12 +139,17 @@ const slides = [
     sub: "Ultra-thin porcelain veneers and precision crowns crafted to restore shape, colour, and confidence in your smile.",
     cta: "Explore Veneers",
     ctaSecondary: "View Gallery",
+    treatmentHref: "/treatments/veneers-crowns",
     align: "right",
     accent: "#c87d1a",
   },
 ];
 
-export default function HeroCarousel() {
+export default function HeroCarousel({
+  onBookClick,
+}: {
+  onBookClick?: () => void;
+}) {
   const [current, setCurrent] = useState(0);
   const [fading, setFading] = useState(false);
 
@@ -193,7 +207,24 @@ export default function HeroCarousel() {
         background: "#0a1628",
         fontFamily: "system-ui, sans-serif",
       }}
+      className="carousel-root"
     >
+      <style>{`
+        @media (max-width: 640px) {
+          .carousel-root { height: 520px !important; }
+          .carousel-content { padding: 0 20px 40px !important; }
+          .carousel-buttons { flex-wrap: wrap !important; gap: 8px !important; }
+          .carousel-btn-primary, .carousel-btn-secondary {
+            padding: 10px 16px !important;
+            font-size: 0.78rem !important;
+            flex: 1 1 auto !important;
+            text-align: center !important;
+            justify-content: center !important;
+          }
+          .carousel-headline { font-size: 1.7rem !important; }
+          .carousel-sub { font-size: 0.82rem !important; }
+        }
+      `}</style>
       {/* Slides */}
       {slides.map((s, i) => (
         <div
@@ -225,6 +256,7 @@ export default function HeroCarousel() {
 
       {/* Text overlay */}
       <div
+        className="carousel-content"
         style={{
           position: "absolute",
           inset: 0,
@@ -283,6 +315,7 @@ export default function HeroCarousel() {
 
           {/* Headline */}
           <h2
+            className="carousel-headline"
             style={{
               fontFamily: "Georgia, serif",
               fontSize: "clamp(2rem, 3.4vw, 3.5rem)",
@@ -300,6 +333,7 @@ export default function HeroCarousel() {
 
           {/* Subtext */}
           <p
+            className="carousel-sub"
             style={{
               fontFamily: "Inter, system-ui, sans-serif",
               fontSize: "clamp(0.88rem, 1.05vw, 1.05rem)",
@@ -315,6 +349,7 @@ export default function HeroCarousel() {
 
           {/* Buttons */}
           <div
+            className="carousel-buttons"
             style={{
               display: "flex",
               gap: 12,
@@ -324,6 +359,11 @@ export default function HeroCarousel() {
           >
             <a
               href="#"
+              className="carousel-btn-primary"
+              onClick={(e) => {
+                e.preventDefault();
+                onBookClick?.();
+              }}
               style={{
                 fontFamily: "Inter, system-ui, sans-serif",
                 fontWeight: 600,
@@ -343,7 +383,8 @@ export default function HeroCarousel() {
               {slide.cta}
             </a>
             <a
-              href="#"
+              href={slide.treatmentHref}
+              className="carousel-btn-secondary"
               style={{
                 fontFamily: "Inter, system-ui, sans-serif",
                 fontWeight: 500,

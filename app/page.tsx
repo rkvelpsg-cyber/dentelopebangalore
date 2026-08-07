@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { useRouter } from "next/navigation";
 import {
   Phone,
   MapPin,
@@ -31,7 +32,10 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { ImageWithFallback } from "@/components/ImageWithFallback";
-import { LABEL_TO_SLUG } from "@/app/treatments/treatments-data";
+import {
+  LABEL_TO_SLUG,
+  TREATMENT_DATA,
+} from "@/app/treatments/treatments-data";
 import HeroCarousel from "@/components/herocarousel";
 import BookingModal from "@/components/BookingModal";
 
@@ -123,17 +127,17 @@ const C = {
   address:
     "3 Tsn Babu, Opposite to SBB Sapphire\nVictorian View Layout, Nallurhalli\nWhitefield, Bengaluru \u2013 560 066",
   city: "Whitefield, Bengaluru",
-  rating: "4.9",
-  reviews: "842",
+  rating: "5.0",
   patients: "2,000+",
   years: "12+",
 };
 
 // ── nav ───────────────────────────────────────────────────────────────────────
 const NAV_LINKS = [
-  { label: "About", sub: [] },
+  { label: "About", href: "#about", sub: [] },
   {
     label: "Treatments",
+    href: "#treatments",
     sub: [
       "Teeth Cleaning",
       "Teeth Whitening",
@@ -153,9 +157,9 @@ const NAV_LINKS = [
       "Implant Dentures",
     ],
   },
-  { label: "Patient Speaks", sub: [] },
-  { label: "Dental Blog", sub: [] },
-  { label: "Our Doctors", sub: [] },
+  { label: "Patient Speaks", href: "#patient-speaks", sub: [] },
+  { label: "Dental Blog", href: "#blog", sub: [] },
+  { label: "Our Doctors", href: "#doctors", sub: [] },
 ];
 
 const TREATMENTS = [
@@ -683,118 +687,63 @@ function FeaturesStrip() {
 
 // ── treatments carousel ───────────────────────────────────────────────────────
 function TreatmentsCarousel() {
-  const [idx, setIdx] = useState(0);
-  const cols = 4;
-  const max = Math.max(0, TREATMENTS.length - cols);
-
   return (
     <section id="treatments" className="py-20" style={{ background: CREAM2 }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-10">
-          <div>
-            <OrangePill>Our Treatments</OrangePill>
-            <h2
-              className="mt-3 text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
-              All Dental Services
-              <br />
-              <span style={{ color: OR }}>Under One Roof</span>
-            </h2>
-            <p className="mt-2 text-gray-500 text-sm max-w-md leading-relaxed">
-              From a routine cleaning to a complete smile makeover — every
-              treatment by MDS specialists.
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setIdx((i) => Math.max(0, i - 1))}
-              disabled={idx === 0}
-              className="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center hover:border-orange-400 hover:text-orange-500 transition disabled:opacity-30 text-gray-500"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <span className="text-xs text-gray-400 font-medium">
-              {idx + 1}–{Math.min(idx + cols, TREATMENTS.length)} /{" "}
-              {TREATMENTS.length}
-            </span>
-            <button
-              onClick={() => setIdx((i) => Math.min(max, i + 1))}
-              disabled={idx >= max}
-              className="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center hover:border-orange-400 hover:text-orange-500 transition disabled:opacity-30 text-gray-500"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-        <div className="overflow-hidden">
-          <div
-            className="flex gap-4 transition-transform duration-500 ease-in-out"
-            style={{
-              transform: `translateX(calc(-${idx} * (100% / ${cols} + 16px / ${cols})))`,
-            }}
+        <div className="mb-10">
+          <OrangePill>Our Treatments</OrangePill>
+          <h2
+            className="mt-3 text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight"
+            style={{ fontFamily: "Poppins, sans-serif" }}
           >
-            {TREATMENTS.map((t) => {
-              const Icon = t.icon;
-              return (
-                <Link
-                  key={t.label}
-                  href={
-                    LABEL_TO_SLUG[t.label]
-                      ? `/treatments/${LABEL_TO_SLUG[t.label]}`
-                      : "#book"
-                  }
-                  style={{
-                    width: `calc((100% - ${(cols - 1) * 16}px) / ${cols})`,
-                    minWidth: "210px",
-                  }}
-                  className="shrink-0 group bg-white rounded-2xl border border-gray-100 p-5 flex flex-col gap-3 shadow-sm hover:shadow-lg hover:border-orange-200 transition-all duration-200 relative cursor-pointer"
-                >
-                  {t.popular && (
-                    <span
-                      className="absolute -top-2 -right-2 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase text-white"
-                      style={{ background: OR }}
-                    >
-                      Popular
-                    </span>
-                  )}
-                  <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center"
-                    style={{ background: "#fff0e8" }}
-                  >
-                    <Icon className="w-5 h-5" style={{ color: OR }} />
-                  </div>
-                  <div>
-                    <h3
-                      className="font-bold text-gray-900 text-sm leading-snug"
-                      style={{ fontFamily: "Poppins, sans-serif" }}
-                    >
-                      {t.label}
-                    </h3>
-                    <p className="text-gray-500 text-xs mt-1 leading-relaxed">
-                      {t.desc}
-                    </p>
-                  </div>
-                  <div className="flex items-center justify-end mt-auto pt-2 border-t border-gray-50">
-                    <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-orange-400 group-hover:translate-x-0.5 transition-all" />
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
+            All Dental Services
+            <br />
+            <span style={{ color: OR }}>Under One Roof</span>
+          </h2>
+          <p className="mt-2 text-gray-500 text-sm max-w-md leading-relaxed">
+            From a routine cleaning to a complete smile makeover — every
+            treatment by MDS specialists.
+          </p>
         </div>
-        <div className="flex justify-center gap-1.5 mt-6">
-          {Array.from({ length: max + 1 }).map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setIdx(i)}
-              className="rounded-full transition-all"
-              style={{
-                width: i === idx ? 22 : 8,
-                height: 8,
-                background: i === idx ? OR : "#ddd",
-              }}
-            />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {TREATMENT_DATA.map((t) => (
+            <Link
+              key={t.slug}
+              href={`/treatments/${t.slug}`}
+              className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-orange-200 transition-all duration-200 overflow-hidden flex flex-col relative"
+            >
+              {t.popular && (
+                <span
+                  className="absolute top-3 right-3 z-10 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase text-white"
+                  style={{ background: OR }}
+                >
+                  Popular
+                </span>
+              )}
+              <div className="w-full h-44 overflow-hidden bg-gray-100">
+                <img
+                  src={t.heroImage}
+                  alt={t.label}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div className="p-4 flex flex-col gap-2 flex-1">
+                <h3
+                  className="font-bold text-gray-900 text-sm leading-snug"
+                  style={{ fontFamily: "Poppins, sans-serif" }}
+                >
+                  {t.label}
+                </h3>
+                <p className="text-gray-500 text-xs leading-relaxed line-clamp-2">
+                  {t.tagline}
+                </p>
+                <div className="mt-auto pt-3 flex items-center justify-end border-t border-gray-50">
+                  <span className="text-xs font-semibold text-orange-500 flex items-center gap-1 group-hover:gap-2 transition-all">
+                    Learn More <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </div>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -803,6 +752,166 @@ function TreatmentsCarousel() {
 }
 
 // ── main page ─────────────────────────────────────────────────────────────────
+
+const SEARCH_ITEMS = [
+  ...TREATMENT_DATA.map((t) => ({
+    label: t.label,
+    sub: t.tagline,
+    href: `/treatments/${t.slug}`,
+    type: "treatment" as const,
+  })),
+  {
+    label: "About Us",
+    sub: "Our story & clinic info",
+    href: "/#about",
+    type: "page" as const,
+  },
+  {
+    label: "Our Doctors",
+    sub: "Meet our MDS specialists",
+    href: "/#doctors",
+    type: "page" as const,
+  },
+  {
+    label: "Patient Reviews",
+    sub: "What patients say",
+    href: "/#reviews",
+    type: "page" as const,
+  },
+  {
+    label: "Dental Blog",
+    sub: "Tips & dental health articles",
+    href: "/#blog",
+    type: "page" as const,
+  },
+  {
+    label: "Contact Us",
+    sub: "Location, hours & directions",
+    href: "/#contact",
+    type: "page" as const,
+  },
+  {
+    label: "Book Appointment",
+    sub: "Schedule your visit",
+    href: "/#book",
+    type: "page" as const,
+  },
+];
+
+function SearchBox() {
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+
+  const results =
+    query.trim().length > 0
+      ? SEARCH_ITEMS.filter(
+          (item) =>
+            item.label.toLowerCase().includes(query.toLowerCase()) ||
+            item.sub.toLowerCase().includes(query.toLowerCase()),
+        ).slice(0, 6)
+      : [];
+
+  useEffect(() => {
+    if (open) setTimeout(() => inputRef.current?.focus(), 50);
+  }, [open]);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(e.target as Node)
+      ) {
+        setOpen(false);
+        setQuery("");
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const navigate = (href: string) => {
+    setOpen(false);
+    setQuery("");
+    router.push(href);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Escape") {
+      setOpen(false);
+      setQuery("");
+    }
+    if (e.key === "Enter" && results.length > 0) navigate(results[0].href);
+  };
+
+  return (
+    <div
+      ref={wrapperRef}
+      className="relative hidden xl:flex items-center ml-auto"
+    >
+      {open ? (
+        <div className="flex items-center gap-2 bg-white border border-orange-300 rounded-xl px-3 py-2 shadow-md w-72">
+          <Search className="w-4 h-4 text-orange-400 shrink-0" />
+          <input
+            ref={inputRef}
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Search treatments, pages…"
+            className="flex-1 text-sm text-gray-700 placeholder:text-gray-400 outline-none bg-transparent"
+          />
+          <button
+            onClick={() => {
+              setOpen(false);
+              setQuery("");
+            }}
+            className="text-gray-400 hover:text-gray-600"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      ) : (
+        <button
+          onClick={() => setOpen(true)}
+          className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-orange-500 hover:bg-orange-50 transition-colors"
+        >
+          <Search className="w-4 h-4" />
+        </button>
+      )}
+      {open && results.length > 0 && (
+        <div className="absolute top-full right-0 mt-2 w-80 bg-white border border-gray-100 rounded-2xl shadow-xl z-50 overflow-hidden">
+          {results.map((item) => (
+            <button
+              key={item.href}
+              onClick={() => navigate(item.href)}
+              className="w-full flex items-start gap-3 px-4 py-3 hover:bg-orange-50 transition-colors text-left"
+            >
+              <span
+                className="mt-0.5 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase shrink-0"
+                style={{
+                  background: item.type === "treatment" ? "#fff0e8" : "#f0f4ff",
+                  color: item.type === "treatment" ? OR : "#3b5bdb",
+                }}
+              >
+                {item.type === "treatment" ? "Treatment" : "Page"}
+              </span>
+              <div>
+                <p className="text-sm font-semibold text-gray-900">
+                  {item.label}
+                </p>
+                <p className="text-xs text-gray-400 mt-0.5">{item.sub}</p>
+              </div>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openNav, setOpenNav] = useState<string | null>(null);
@@ -856,12 +965,15 @@ export default function Home() {
                 onMouseEnter={() => setOpenNav(n.label)}
                 onMouseLeave={() => setOpenNav(null)}
               >
-                <button className="flex items-center gap-1 px-3 py-2 rounded-lg hover:text-orange-500 hover:bg-orange-50 transition-colors whitespace-nowrap">
+                <a
+                  href={n.href}
+                  className="flex items-center gap-1 px-3 py-2 rounded-lg hover:text-orange-500 hover:bg-orange-50 transition-colors whitespace-nowrap"
+                >
                   {n.label}{" "}
                   {n.sub.length > 0 && (
                     <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
                   )}
-                </button>
+                </a>
                 {n.sub.length > 0 && openNav === n.label && (
                   <div className="absolute top-full left-0 bg-white border border-gray-100 rounded-2xl shadow-xl py-2 min-w-[200px] z-50">
                     {n.sub.map((s) => (
@@ -882,10 +994,15 @@ export default function Home() {
               </div>
             ))}
           </nav>
-          <button className="hidden xl:flex w-8 h-8 items-center justify-center rounded-lg text-gray-400 hover:text-orange-500 hover:bg-orange-50 transition-colors ml-auto">
-            <Search className="w-4 h-4" />
-          </button>
+          <SearchBox />
           <div className="hidden xl:flex items-center gap-2 shrink-0">
+            <Link
+              href="/doctor-dashboard"
+              className="flex items-center gap-2 text-sm font-bold text-white px-4 py-2.5 rounded-lg transition hover:opacity-90"
+              style={{ background: OR, fontFamily: "Poppins, sans-serif" }}
+            >
+              <Shield className="w-4 h-4" /> Doctor Dashboard
+            </Link>
             <button
               onClick={() => setBookingOpen(true)}
               className="flex items-center gap-2 text-sm font-bold text-white px-5 py-2.5 rounded-lg transition hover:opacity-90"
@@ -951,6 +1068,14 @@ export default function Home() {
               </div>
             ))}
             <div className="pt-3 flex flex-col gap-2">
+              <Link
+                href="/doctor-dashboard"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center justify-center gap-2 text-sm font-bold text-white py-3 rounded-xl w-full"
+                style={{ background: OR, fontFamily: "Poppins, sans-serif" }}
+              >
+                <Shield className="w-4 h-4" /> Doctor Dashboard
+              </Link>
               <button
                 onClick={() => {
                   setBookingOpen(true);
@@ -973,7 +1098,7 @@ export default function Home() {
         )}
       </header>
 
-      <HeroCarousel />
+      <HeroCarousel onBookClick={() => setBookingOpen(true)} />
       <FeaturesStrip />
 
       <TreatmentsCarousel />
@@ -1254,7 +1379,7 @@ export default function Home() {
               <div className="flex items-center gap-2 mt-2">
                 <Stars count={5} size={4} />
                 <span className="text-sm text-gray-500">
-                  {C.rating}/5 · {C.reviews} Google reviews
+                  5 Star Google Rating
                 </span>
               </div>
             </div>
@@ -1334,8 +1459,7 @@ export default function Home() {
                 fontFamily: "Poppins, sans-serif",
               }}
             >
-              Read All {C.reviews} Reviews on Google{" "}
-              <ArrowRight className="w-4 h-4" />
+              See Our 5-Star Google Reviews <ArrowRight className="w-4 h-4" />
             </a>
           </div>
         </div>
@@ -1485,95 +1609,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* CTA orange section */}
-      <section
-        className="py-20 relative overflow-hidden"
-        style={{ background: OR }}
-      >
-        <div
-          className="absolute inset-0 pointer-events-none opacity-10"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 20% 50%, white 1px, transparent 1px), radial-gradient(circle at 80% 20%, white 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
-          <div className="text-white space-y-6">
-            <h2
-              className="text-4xl lg:text-5xl font-extrabold leading-tight"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
-              Book Your Free
-              <br />
-              Consultation Today
-            </h2>
-            <p className="text-white/80 text-lg leading-relaxed">
-              No obligations, no pressure. Just honest advice from a specialist
-              who genuinely cares about your oral health.
-            </p>
-            <div className="space-y-4">
-              {[
-                { icon: Phone, l: C.phone, s: "Call or WhatsApp anytime" },
-                { icon: MapPin, l: "Whitefield, Bengaluru", s: C.address },
-                {
-                  icon: Clock,
-                  l: "Mon\u2013Sat: 9 AM\u20138 PM",
-                  s: "Sunday: 10 AM\u20132 PM",
-                },
-              ].map(({ icon: Icon, l, s }) => (
-                <div key={l} className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0 mt-0.5">
-                    <Icon className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="font-bold text-white text-sm">{l}</p>
-                    <p className="text-white/70 text-xs mt-0.5 whitespace-pre-line">
-                      {s}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="flex gap-3">
-              <a
-                href={`https://wa.me/${C.wa}`}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold px-5 py-3 rounded-xl transition text-sm"
-                style={{ fontFamily: "Poppins, sans-serif" }}
-              >
-                <MessageCircle className="w-4 h-4" /> WhatsApp Us
-              </a>
-              <a
-                href={`tel:${C.phone}`}
-                className="flex items-center gap-2 bg-white/20 hover:bg-white/30 border border-white/30 text-white font-semibold px-5 py-3 rounded-xl transition text-sm"
-              >
-                <Phone className="w-4 h-4" /> Call Now
-              </a>
-            </div>
-          </div>
-          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-100">
-              <h3
-                className="text-xl font-extrabold text-gray-900"
-                style={{ fontFamily: "Poppins, sans-serif" }}
-              >
-                Request a Callback
-              </h3>
-              <p className="text-gray-400 text-xs mt-0.5">
-                We respond within 30 minutes
-              </p>
-            </div>
-            <div className="p-6">
-              <BookingForm compact />
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* blog */}
-      <section className="py-20" style={{ background: CREAM2 }}>
+      <section id="blog" className="py-20" style={{ background: CREAM2 }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-12">
             <div>
@@ -1770,7 +1807,7 @@ export default function Home() {
                   <Calendar className="w-4 h-4" /> Book Appointment
                 </button>
                 <a
-                  href="https://www.google.com/maps/dir/?api=1&destination=Victorian+View+Layout+Nallurhalli+Whitefield+Bengaluru"
+                  href="https://www.google.com/maps/place/Dentelope+Advanced+Dental+care%7C+Whitefield,Nallurhalli/@12.966993,77.7367919,16z/data=!3m1!4b1!4m6!3m5!1s0x3bae13ab3bc55ce3:0xe846e432bcdb0036!8m2!3d12.966993!4d77.7393668"
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center justify-center gap-2 font-semibold py-3 rounded-xl border transition hover:bg-orange-50 text-sm"
@@ -1786,7 +1823,7 @@ export default function Home() {
             >
               <iframe
                 title="Dentelope map"
-                src="https://maps.google.com/maps?q=Victorian+View+Layout+Nallurhalli+Whitefield+Bengaluru+560066&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.0!2d77.7367919!3d12.966993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae13ab3bc55ce3%3A0xe846e432bcdb0036!2sDentelope%20Advanced%20Dental%20care%7C%20Whitefield%2CNallurhalli!5e0!3m2!1sen!2sin!4v1691000000000"
                 width="100%"
                 height="100%"
                 style={{ border: 0, display: "block", minHeight: "420px" }}
@@ -1803,8 +1840,8 @@ export default function Home() {
       <footer style={{ background: "#2a0e00", color: "#c9a98a" }}>
         <div className="w-full px-6 sm:px-10 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-x-10 gap-y-10">
           {/* col 1 — brand + contact */}
-          <div className="lg:col-span-2 space-y-5 flex flex-col items-start">
-            <div className="flex items-center gap-3 pl-4">
+          <div className="lg:col-span-2 space-y-5 flex flex-col items-start sm:items-start">
+            <div className="flex items-center gap-3 pl-0 sm:pl-4">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/dentelope.svg"
@@ -1855,7 +1892,7 @@ export default function Home() {
                 </span>
               </div>
             </div>
-            <div className="space-y-2 pl-[108px]">
+            <div className="space-y-2 pl-0 sm:pl-[108px] w-full">
               <p
                 className="text-xs font-bold uppercase tracking-widest"
                 style={{ color: OR }}
@@ -1891,7 +1928,7 @@ export default function Home() {
                 Nallurhalli, Whitefield, Bengaluru, Karnataka – 560066
               </p>
             </div>
-            <div className="flex gap-2.5 pl-[108px]">
+            <div className="flex gap-2.5 pl-0 sm:pl-[108px]">
               {(
                 [
                   IconInstagram,
@@ -1929,8 +1966,6 @@ export default function Home() {
                 "Clinics Near Me",
                 "Patient Testimonials",
                 "Online Payments",
-                "Membership Plans",
-                "0% EMI Options",
               ].map((l) => (
                 <li key={l}>
                   <a href="#" className="hover:text-white transition-colors">
@@ -2022,8 +2057,6 @@ export default function Home() {
               {[
                 "Book Appointment",
                 "Dental Blog",
-                "Career Openings",
-                "News & Media",
                 "Dental Education Videos",
                 "Dental Problems, Symptoms & Treatments",
               ].map((l) => (
@@ -2067,7 +2100,7 @@ export default function Home() {
 
       {/* floating WhatsApp */}
       <a
-        href={`https://wa.me/${C.wa}`}
+        href={`https://wa.me/${C.wa}?text=${encodeURIComponent("Hi, I'd like to book an appointment at Dentelope Advanced Dental Care. Please let me know the available slots.")}`}
         target="_blank"
         rel="noreferrer"
         title="Chat on WhatsApp"

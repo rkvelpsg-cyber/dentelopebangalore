@@ -46,8 +46,7 @@ export const TREATMENT_DATA: TreatmentData[] = [
     heroDesc:
       "Professional scaling and polishing to remove plaque, tartar and stains — the foundation of lifelong oral health.",
     price: "₹500",
-    heroImage:
-      "https://images.unsplash.com/photo-1606811841689-23dfddce3e8b?w=800&h=600&fit=crop&auto=format",
+    heroImage: "/images/toothcleaning.png",
     duration: "45–60 min",
     sessions: "1",
     painLevel: "None",
@@ -115,8 +114,7 @@ export const TREATMENT_DATA: TreatmentData[] = [
     heroDesc:
       "Professional laser whitening up to 8 shades lighter — safe, fast and long-lasting results with zero enamel damage.",
     price: "₹3,500",
-    heroImage:
-      "https://images.unsplash.com/photo-1595956553066-fe24a8c33395?w=800&h=600&fit=crop&auto=format",
+    heroImage: "/images/teethwhitening.png",
     duration: "60–90 min",
     sessions: "1",
     painLevel: "Minimal",
@@ -184,8 +182,7 @@ export const TREATMENT_DATA: TreatmentData[] = [
     heroDesc:
       "Titanium implants that function, feel and look like real teeth — the gold standard for replacing missing teeth.",
     price: "₹18,000",
-    heroImage:
-      "https://images.unsplash.com/photo-1629909615184-74f495363b67?w=800&h=600&fit=crop&auto=format",
+    heroImage: "/images/dentalimplants.png",
     duration: "1–2 hrs (placement)",
     sessions: "3–4 visits",
     painLevel: "Low (anaesthesia)",
@@ -253,8 +250,7 @@ export const TREATMENT_DATA: TreatmentData[] = [
     heroDesc:
       "Metal, ceramic and clear aligner options — tailored orthodontic treatment by MDS specialists for all ages.",
     price: "₹22,000",
-    heroImage:
-      "https://images.unsplash.com/photo-1655807226773-59c8e18a80de?w=800&h=600&fit=crop&auto=format",
+    heroImage: "/images/bracesaligners.png",
     duration: "18–24 months avg.",
     sessions: "Monthly check-ins",
     painLevel: "Mild (adjustment days)",
@@ -322,8 +318,7 @@ export const TREATMENT_DATA: TreatmentData[] = [
     heroDesc:
       "Painless rotary RCT by endodontists — preserve your natural tooth and get back to normal life the same day.",
     price: "₹4,500",
-    heroImage:
-      "https://images.unsplash.com/photo-1588776814546-1ffbb9b8c068?w=800&h=600&fit=crop&auto=format",
+    heroImage: "/images/rootcanel.png",
     duration: "60–90 min",
     sessions: "1–2",
     painLevel: "None (anaesthesia)",
@@ -396,7 +391,7 @@ export const TREATMENT_DATA: TreatmentData[] = [
     heroDesc:
       "A customised combination of veneers, crowns, whitening and contouring — crafted to your facial features.",
     price: "₹8,000+",
-    heroImage: "/images/smilemakeover.png",
+    heroImage: "/images/smilemake.png",
     duration: "2–4 weeks",
     sessions: "3–5",
     painLevel: "Minimal",
