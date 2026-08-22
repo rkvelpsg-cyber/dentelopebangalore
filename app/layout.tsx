@@ -6,6 +6,11 @@ const siteUrl =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  icons: {
+    icon: [{ url: "/dentelope.svg", type: "image/svg+xml" }],
+    shortcut: ["/dentelope.svg"],
+    apple: [{ url: "/dentelope.svg", type: "image/svg+xml" }],
+  },
   title: {
     default: "Dentelope | Best Dental Clinic in Whitefield, Bengaluru",
     template: "%s | Dentelope Dental Care",
