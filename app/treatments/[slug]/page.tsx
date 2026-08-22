@@ -28,8 +28,8 @@ const CREAM = "#efe5cc";
 const DARK = "#1a1a1a";
 
 const C = {
-  phone: "+91 80737 62560",
-  wa: "918073762560",
+  phone: "+91-6364609627",
+  wa: "916364609627",
   email: "care@dentelope.in",
 };
 
@@ -217,7 +217,7 @@ function BookingFormMini({ treatmentLabel }: { treatmentLabel: string }) {
         <input
           type="tel"
           required
-          placeholder="+91 80737 62560"
+          placeholder="+91-6364609627"
           className="w-full rounded-xl border border-gray-200 bg-[#faf5ee] px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-300"
         />
         <input

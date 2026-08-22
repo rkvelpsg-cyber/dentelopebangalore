@@ -25,3 +25,29 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.reviews-track {
+  --review-gap: 20px;
+  --review-card-width: calc((100% - (var(--review-gap) * 2)) / 3);
+  transform: translateX(
+    calc(
+      -1 * var(--review-index) * (var(--review-card-width) + var(--review-gap))
+    )
+  );
+}
+
+.review-card {
+  width: var(--review-card-width);
+}
+
+@media (max-width: 1023px) {
+  .reviews-track {
+    --review-card-width: calc((100% - var(--review-gap)) / 2);
+  }
+}
+
+@media (max-width: 639px) {
+  .reviews-track {
+    --review-card-width: 100%;
+  }
+}

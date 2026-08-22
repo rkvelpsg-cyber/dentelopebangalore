@@ -56,8 +56,8 @@ const WHITE = "#ffffff";
 // ── brand ─────────────────────────────────────────────────────────────────────
 const C = {
   name: "Dentelope",
-  phone: "+91 98765 43210",
-  wa: "919876543210",
+  phone: "+91-6364609627",
+  wa: "916364609627",
   email: "care@dentelope.in",
   address:
     "3 Tsn Babu, Opposite to SBB Sapphire\nVictorian View Layout, Nallurhalli\nWhitefield, Bengaluru – 560 066",
@@ -281,32 +281,16 @@ const WHY = [
 // ── doctors ───────────────────────────────────────────────────────────────────
 const DOCTORS = [
   {
-    name: "Dr. Kavitha Reddy",
-    role: "Chief Dental Surgeon",
-    spec: "Oral & Maxillofacial Surgery",
-    exp: "14 yrs",
-    img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=480&fit=crop&auto=format&q=85",
+    name: "Dr. Shreya Dutta., BDS (Gold Medalist)., MDS(University Rank Holder)",
+    role: "Founder & Clinical Director",
+    img: "/images/drShreya.jpeg",
+    bio: "Dr. Shreya Dutta is the Founder & Clinical Director of Dentelope Advanced Dental Care, with over 7+ years of clinical experience in delivering advanced, patient-centered dental care. She completed her BDS from SGR Dental College, Bangalore, where she was awarded a Gold Medal for academic excellence, and earned her MDS in Pediatric and Preventive Dentistry from Rajiv Gandhi College of Dental Sciences & Hospital, Bangalore, as a University Rank Holder. Her expertise includes Pediatric Dentistry, Preventive Dental Care, Root Canal Treatment, Aesthetic Dentistry, Laser Dentistry, Sedation Dentistry, and Smile Makeovers. Known for her gentle and child-friendly approach, Dr. Shreya is committed to creating positive dental experiences while providing modern, minimally invasive treatments for children and adults. Her passion for innovation and evidence-based dentistry ensures the highest standards of care and long-lasting oral health.",
   },
   {
-    name: "Dr. Arjun Mehta",
-    role: "Orthodontist",
-    spec: "Orthodontics & Dentofacial",
-    exp: "10 yrs",
-    img: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=480&fit=crop&auto=format&q=85",
-  },
-  {
-    name: "Dr. Sneha Patel",
-    role: "Cosmetic Dentist",
-    spec: "Aesthetic & Restorative",
-    exp: "8 yrs",
-    img: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&h=480&fit=crop&auto=format&q=85",
-  },
-  {
-    name: "Dr. Rohan Das",
-    role: "Implantologist",
-    spec: "Prosthodontics & Implantology",
-    exp: "9 yrs",
-    img: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=480&fit=crop&auto=format&q=85",
+    name: "Dr. M N Mohit., BDS., MDS.",
+    role: "Co-Founder & Clinical Director",
+    img: "/images/drMohit.jpg",
+    bio: "Dr. M N Mohit is the Co-Founder and Clinical Director of Dentelope Advanced Dental Care, with over 7+ years of clinical experience in providing advanced, patient-centered dental care. He completed his BDS from SGR Dental College, Bangalore, and his MDS in Pediatric and Preventive Dentistry from Vydehi Institute of Dental Sciences, Bangalore. Specializing in Pediatric Dentistry, Root Canal Treatment, Aesthetic Dentistry, Laser Dentistry, and Preventive Dental Care, Dr. Mohit is known for his gentle, child-friendly approach and expertise in managing dental anxiety. His commitment to modern technology, minimally invasive treatments, and compassionate care ensures a comfortable and positive dental experience for children and families across Bangalore.",
   },
 ];
 
@@ -382,11 +366,11 @@ const FAQS = [
   },
   {
     q: "How do I book an appointment?",
-    a: "Use the form on this page, call/WhatsApp +91 98765 43210, or walk in. Same-day slots available for most non-surgical treatments.",
+    a: "Use the form on this page, call/WhatsApp +91-6364609627, or walk in. Same-day slots available for most non-surgical treatments.",
   },
   {
     q: "What are your clinic timings?",
-    a: "Monday–Saturday: 9:00 AM – 8:00 PM. Sunday: 10:00 AM – 2:00 PM. Emergency dental care available on call outside these hours.",
+    a: "Open all 7 days: 9:00 AM – 9:00 PM. Emergency dental care available on call outside these hours.",
   },
   {
     q: "How hygienic is the clinic?",
@@ -522,7 +506,7 @@ function BookingForm({ compact = false }: { compact?: boolean }) {
         <input
           type="tel"
           required
-          placeholder="+91 98765 43210"
+          placeholder="+91-6364609627"
           className={inputCls}
           value={form.phone}
           onChange={(e) => setForm({ ...form, phone: e.target.value })}
@@ -869,6 +853,9 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [revIdx, setRevIdx] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [expandedDoctorBio, setExpandedDoctorBio] = useState<string | null>(
+    null,
+  );
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 60);
@@ -891,8 +878,8 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between py-2 text-xs text-gray-500">
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5">
-              <Clock className="w-3 h-3" style={{ color: OR }} /> Mon–Sat: 9
-              AM–8 PM · Sun: 10 AM–2 PM
+              <Clock className="w-3 h-3" style={{ color: OR }} /> All 7 days: 9
+              AM–9 PM
             </span>
             <span className="flex items-center gap-1.5">
               <MapPin className="w-3 h-3" style={{ color: OR }} /> Whitefield,
@@ -1163,7 +1150,7 @@ export default function App() {
                 {
                   icon: Clock,
                   l: "Working Hours",
-                  v: "Mon–Sat: 9:00 AM – 8:00 PM\nSunday: 10:00 AM – 2:00 PM",
+                  v: "Open all 7 days: 9:00 AM – 9:00 PM",
                 },
                 { icon: Phone, l: "Phone & WhatsApp", v: C.phone },
               ].map(({ icon: Icon, l, v }) => (
@@ -1375,44 +1362,55 @@ export default function App() {
               committed to extraordinary results and genuine patient comfort.
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {DOCTORS.map((d) => (
-              <div
-                key={d.name}
-                className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl hover:border-orange-200 transition-all duration-300"
-              >
-                <div className="aspect-[4/4.5] overflow-hidden bg-gray-50">
-                  <img
-                    src={d.img}
-                    alt={d.name}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                  />
+          <div className="grid lg:grid-cols-2 gap-6 justify-center">
+            {DOCTORS.map((d) => {
+              const isExpanded = expandedDoctorBio === d.name;
+              return (
+                <div
+                  key={d.name}
+                  className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl hover:border-orange-200 transition-all duration-300 max-w-4xl mx-auto w-full"
+                >
+                  <div className="flex flex-col sm:flex-row h-full">
+                    <div className="sm:w-80 h-64 sm:h-auto overflow-hidden bg-gray-50 shrink-0">
+                      <img
+                        src={d.img}
+                        alt={d.name}
+                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    <div className="p-6 md:p-8 flex-1">
+                      <h3
+                        className="font-extrabold text-gray-900 text-xl leading-snug"
+                        style={{ fontFamily: "Poppins, sans-serif" }}
+                      >
+                        {d.name}
+                      </h3>
+                      <p
+                        className="font-semibold text-sm mt-2"
+                        style={{ color: OR }}
+                      >
+                        {d.role}
+                      </p>
+                      <p
+                        className={`mt-4 text-gray-600 text-sm leading-relaxed ${isExpanded ? "" : "line-clamp-3"}`}
+                      >
+                        {d.bio}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setExpandedDoctorBio(isExpanded ? null : d.name)
+                        }
+                        className="mt-2 text-sm font-semibold underline underline-offset-2 cursor-pointer"
+                        style={{ color: OR }}
+                      >
+                        {isExpanded ? "less" : "more"}
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div className="p-5">
-                  <h3
-                    className="font-extrabold text-gray-900 text-base"
-                    style={{ fontFamily: "Poppins, sans-serif" }}
-                  >
-                    {d.name}
-                  </h3>
-                  <p
-                    className="font-semibold text-sm mt-0.5"
-                    style={{ color: OR }}
-                  >
-                    {d.role}
-                  </p>
-                  <p className="text-gray-400 text-xs mt-1 leading-snug">
-                    {d.spec}
-                  </p>
-                  <span
-                    className="mt-3 inline-block text-xs font-bold px-3 py-1 rounded-full"
-                    style={{ background: "#fff0e8", color: OR }}
-                  >
-                    {d.exp} exp.
-                  </span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -1580,8 +1578,8 @@ export default function App() {
                 { icon: MapPin, l: "Whitefield, Bengaluru", s: C.address },
                 {
                   icon: Clock,
-                  l: "Mon–Sat: 9 AM–8 PM",
-                  s: "Sunday: 10 AM–2 PM",
+                  l: "All 7 Days: 9 AM–9 PM",
+                  s: "Open every day",
                 },
               ].map(({ icon: Icon, l, s }) => (
                 <div key={l} className="flex items-start gap-4">
@@ -1801,8 +1799,7 @@ export default function App() {
                 </p>
               </div>
               {[
-                { icon: Clock, l: "Mon–Sat", v: "9:00 AM – 8:00 PM" },
-                { icon: Clock, l: "Sunday", v: "10:00 AM – 2:00 PM" },
+                { icon: Clock, l: "All 7 Days", v: "9:00 AM – 9:00 PM" },
                 { icon: Phone, l: "Phone / WhatsApp", v: C.phone },
                 { icon: MessageCircle, l: "Email", v: C.email },
               ].map(({ icon: Icon, l, v }) => (
@@ -2044,7 +2041,7 @@ export default function App() {
                 { icon: MapPin, v: C.address },
                 { icon: Phone, v: C.phone },
                 { icon: MessageCircle, v: "WhatsApp Us" },
-                { icon: Clock, v: "Mon–Sat 9AM–8PM\nSun 10AM–2PM" },
+                { icon: Clock, v: "All 7 days: 9AM–9PM" },
               ].map(({ icon: Icon, v }, i) => (
                 <li key={i} className="flex items-start gap-2.5">
                   <Icon

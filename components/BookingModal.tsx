@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { X, Calendar, CheckCircle } from "lucide-react";
 
 const OR = "#e8531a";
-const DOCTOR_WA = "918073762560";
+const DOCTOR_WA = "916364609627";
 
 interface Props {
   isOpen: boolean;
@@ -169,7 +169,7 @@ export default function BookingModal({
               <input
                 required
                 type="tel"
-                placeholder="+91 80737 62560"
+                placeholder="+91-6364609627"
                 value={form.phone}
                 onChange={(e) => set("phone", e.target.value)}
                 className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-300"

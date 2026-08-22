@@ -121,8 +121,8 @@ const WHITE = "#ffffff";
 // ── brand ─────────────────────────────────────────────────────────────────────
 const C = {
   name: "Dentelope",
-  phone: "+91 80737 62560",
-  wa: "918073762560",
+  phone: "+91-6364609627",
+  wa: "916364609627",
   email: "care@dentelope.in",
   address:
     "3 Tsn Babu, Opposite to SBB Sapphire\nVictorian View Layout, Nallurhalli\nWhitefield, Bengaluru \u2013 560 066",
@@ -310,34 +310,69 @@ const WHY = [
 // ── doctors ───────────────────────────────────────────────────────────────────
 const DOCTORS = [
   {
-    name: "Dr. Kavitha Reddy",
-    role: "Chief Dental Surgeon",
-    spec: "Oral & Maxillofacial Surgery",
-    exp: "14 yrs",
-    img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=480&fit=crop&auto=format&q=85",
+    name: "Dr. Shreya Dutta., BDS (Gold Medalist)., MDS(University Rank Holder)",
+    role: "Founder & Clinical Director",
+    img: "/images/drShreya.jpeg",
+    bio: "Dr. Shreya Dutta is the Founder & Clinical Director of Dentelope Advanced Dental Care, with over 7+ years of clinical experience in delivering advanced, patient-centered dental care. She completed her BDS from SGR Dental College, Bangalore, where she was awarded a Gold Medal for academic excellence, and earned her MDS in Pediatric and Preventive Dentistry from Rajiv Gandhi College of Dental Sciences & Hospital, Bangalore, as a University Rank Holder. Her expertise includes Pediatric Dentistry, Preventive Dental Care, Root Canal Treatment, Aesthetic Dentistry, Laser Dentistry, Sedation Dentistry, and Smile Makeovers. Known for her gentle and child-friendly approach, Dr. Shreya is committed to creating positive dental experiences while providing modern, minimally invasive treatments for children and adults. Her passion for innovation and evidence-based dentistry ensures the highest standards of care and long-lasting oral health.",
   },
   {
-    name: "Dr. Arjun Mehta",
-    role: "Orthodontist",
-    spec: "Orthodontics & Dentofacial",
-    exp: "10 yrs",
-    img: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=480&fit=crop&auto=format&q=85",
-  },
-  {
-    name: "Dr. Sneha Patel",
-    role: "Cosmetic Dentist",
-    spec: "Aesthetic & Restorative",
-    exp: "8 yrs",
-    img: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&h=480&fit=crop&auto=format&q=85",
-  },
-  {
-    name: "Dr. Rohan Das",
-    role: "Implantologist",
-    spec: "Prosthodontics & Implantology",
-    exp: "9 yrs",
-    img: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=480&fit=crop&auto=format&q=85",
+    name: "Dr. M N Mohit., BDS., MDS.",
+    role: "Co-Founder & Clinical Director",
+    img: "/images/drMohit.jpg",
+    bio: "Dr. M N Mohit is the Co-Founder and Clinical Director of Dentelope Advanced Dental Care, with over 7+ years of clinical experience in providing advanced, patient-centered dental care. He completed his BDS from SGR Dental College, Bangalore, and his MDS in Pediatric and Preventive Dentistry from Vydehi Institute of Dental Sciences, Bangalore. Specializing in Pediatric Dentistry, Root Canal Treatment, Aesthetic Dentistry, Laser Dentistry, and Preventive Dental Care, Dr. Mohit is known for his gentle, child-friendly approach and expertise in managing dental anxiety. His commitment to modern technology, minimally invasive treatments, and compassionate care ensures a comfortable and positive dental experience for children and families across Bangalore.",
   },
 ];
+
+function DoctorCard({ doctor }: { doctor: (typeof DOCTORS)[number] }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const bioId = `doctor-bio-${doctor.name.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}`;
+
+  return (
+    <div className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl hover:border-orange-200 transition-all duration-300 max-w-4xl mx-auto w-full">
+      <div className="flex flex-col sm:flex-row h-full">
+        <div className="sm:w-80 h-auto sm:h-auto overflow-hidden bg-gray-50 shrink-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={doctor.img}
+            alt={doctor.name}
+            className="w-full h-auto sm:h-full object-contain sm:object-cover object-top group-hover:scale-105 transition-transform duration-500"
+          />
+        </div>
+        <div className="p-6 md:p-8 flex-1">
+          <h3
+            className="font-extrabold text-gray-900 text-xl leading-snug"
+            style={{ fontFamily: "Poppins, sans-serif" }}
+          >
+            {doctor.name}
+          </h3>
+          <p className="font-semibold text-sm mt-2" style={{ color: OR }}>
+            {doctor.role}
+          </p>
+          <p
+            id={bioId}
+            className={`mt-4 text-gray-600 text-sm leading-relaxed ${isExpanded ? "" : "line-clamp-3"}`}
+          >
+            {doctor.bio}
+          </p>
+          <button
+            type="button"
+            aria-expanded={isExpanded}
+            aria-controls={bioId}
+            onClick={() => setIsExpanded((expanded) => !expanded)}
+            className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold cursor-pointer transition-colors hover:text-orange-700"
+            style={{ color: OR }}
+          >
+            {isExpanded ? "Read less" : "Read more"}
+            <ChevronDown
+              className={`h-4 w-4 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
+              aria-hidden="true"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 // ── reviews ───────────────────────────────────────────────────────────────────
 const REVIEWS = [
@@ -411,11 +446,11 @@ const FAQS = [
   },
   {
     q: "How do I book an appointment?",
-    a: "Use the form on this page, call/WhatsApp +91 80737 62560, or walk in. Same-day slots available for most non-surgical treatments.",
+    a: "Use the form on this page, call/WhatsApp +91-6364609627, or walk in. Same-day slots available for most non-surgical treatments.",
   },
   {
     q: "What are your clinic timings?",
-    a: "Monday\u2013Saturday: 9:00 AM \u2013 8:00 PM. Sunday: 10:00 AM \u2013 2:00 PM. Emergency dental care available on call outside these hours.",
+    a: "Open all 7 days: 9:00 AM \u2013 9:00 PM. Emergency dental care available on call outside these hours.",
   },
   {
     q: "How hygienic is the clinic?",
@@ -551,7 +586,7 @@ function BookingForm({ compact = false }: { compact?: boolean }) {
         <input
           type="tel"
           required
-          placeholder="+91 80737 62560"
+          placeholder="+91-6364609627"
           className={inputCls}
           value={form.phone}
           onChange={(e) => setForm({ ...form, phone: e.target.value })}
@@ -918,6 +953,8 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
   const [revIdx, setRevIdx] = useState(0);
+  const [reviewVisibleCount, setReviewVisibleCount] = useState(3);
+  const [reviewsPaused, setReviewsPaused] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
@@ -926,7 +963,33 @@ export default function Home() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  const maxRev = REVIEWS.length - 3;
+  useEffect(() => {
+    const updateVisibleCount = () => {
+      setReviewVisibleCount(
+        window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3,
+      );
+    };
+
+    updateVisibleCount();
+    window.addEventListener("resize", updateVisibleCount);
+    return () => window.removeEventListener("resize", updateVisibleCount);
+  }, []);
+
+  const maxRev = Math.max(0, REVIEWS.length - reviewVisibleCount);
+
+  useEffect(() => {
+    setRevIdx((index) => Math.min(index, maxRev));
+  }, [maxRev]);
+
+  useEffect(() => {
+    if (reviewsPaused) return;
+
+    const timer = window.setInterval(() => {
+      setRevIdx((index) => (index >= maxRev ? 0 : index + 1));
+    }, 4500);
+
+    return () => window.clearInterval(timer);
+  }, [maxRev, reviewsPaused]);
 
   return (
     <div
@@ -1321,44 +1384,9 @@ export default function Home() {
               committed to extraordinary results.
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {DOCTORS.map((d) => (
-              <div
-                key={d.name}
-                className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl hover:border-orange-200 transition-all duration-300"
-              >
-                <div className="aspect-[4/4.5] overflow-hidden bg-gray-50">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={d.img}
-                    alt={d.name}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-5">
-                  <h3
-                    className="font-extrabold text-gray-900 text-base"
-                    style={{ fontFamily: "Poppins, sans-serif" }}
-                  >
-                    {d.name}
-                  </h3>
-                  <p
-                    className="font-semibold text-sm mt-0.5"
-                    style={{ color: OR }}
-                  >
-                    {d.role}
-                  </p>
-                  <p className="text-gray-400 text-xs mt-1 leading-snug">
-                    {d.spec}
-                  </p>
-                  <span
-                    className="mt-3 inline-block text-xs font-bold px-3 py-1 rounded-full"
-                    style={{ background: "#fff0e8", color: OR }}
-                  >
-                    {d.exp} exp.
-                  </span>
-                </div>
-              </div>
+          <div className="grid lg:grid-cols-2 gap-6 justify-center">
+            {DOCTORS.map((doctor) => (
+              <DoctorCard key={doctor.name} doctor={doctor} />
             ))}
           </div>
         </div>
@@ -1400,21 +1428,25 @@ export default function Home() {
               </button>
             </div>
           </div>
-          <div className="overflow-hidden">
+          <div
+            className="overflow-hidden"
+            onMouseEnter={() => setReviewsPaused(true)}
+            onMouseLeave={() => setReviewsPaused(false)}
+            onFocus={() => setReviewsPaused(true)}
+            onBlur={() => setReviewsPaused(false)}
+          >
             <div
-              className="flex gap-5 transition-transform duration-500 ease-in-out"
-              style={{
-                transform: `translateX(calc(-${revIdx} * (100% / 3 + 20px / 3)))`,
-              }}
+              className="reviews-track flex gap-5 transition-transform duration-500 ease-in-out"
+              style={
+                {
+                  "--review-index": revIdx,
+                } as React.CSSProperties
+              }
             >
               {REVIEWS.map((r) => (
                 <div
                   key={r.name}
-                  style={{
-                    width: "calc((100% - 40px) / 3)",
-                    minWidth: "280px",
-                  }}
-                  className="shrink-0 bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md hover:border-orange-200 transition-all"
+                  className="review-card shrink-0 bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md hover:border-orange-200 transition-all"
                 >
                   <Stars count={r.rating} size={4} />
                   <p className="mt-4 text-gray-600 text-sm leading-relaxed italic line-clamp-5">
@@ -1775,8 +1807,7 @@ export default function Home() {
                 </p>
               </div>
               {[
-                { icon: Clock, l: "Mon\u2013Sat", v: "9:00 AM \u2013 8:00 PM" },
-                { icon: Clock, l: "Sunday", v: "10:00 AM \u2013 2:00 PM" },
+                { icon: Clock, l: "All 7 Days", v: "9:00 AM \u2013 9:00 PM" },
                 { icon: Phone, l: "Phone / WhatsApp", v: C.phone },
                 { icon: MessageCircle, l: "Email", v: C.email },
               ].map(({ icon: Icon, l, v }) => (
