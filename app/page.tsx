@@ -298,7 +298,7 @@ const WHY = [
   {
     icon: "🏅",
     title: "Safe & Hygienic Environment",
-    desc: "Dentelope is ISO 9001 certified with NABH-compliant sterilisation protocols and quarterly independent safety audits. Our clinic uses hospital-grade autoclaves, single-use instruments and barrier protocols — so you can visit with complete peace of mind.",
+    desc: "Our clinic follows hospital-grade sterilisation protocols, single-use instruments and strict barrier measures — so you can visit with complete peace of mind.",
   },
   {
     icon: "💬",
@@ -377,12 +377,44 @@ function DoctorCard({ doctor }: { doctor: (typeof DOCTORS)[number] }) {
 // ── reviews ───────────────────────────────────────────────────────────────────
 const REVIEWS = [
   {
-    name: "Priya Ramesh",
+    name: "Harsh M",
+    init: "HM",
+    rating: 5,
+    treatment: "Tooth Extraction",
+    date: "Sep 2026",
+    text: "The clinic is clean and premium. The rates are also affordable. Dr. Mohit removed my teeth and the experience was pleasant. I would highly recommend this clinic in Nallurhalli, Whitefield.",
+  },
+  {
+    name: "Krishna Kumar",
+    init: "KK",
+    rating: 5,
+    treatment: "Root Canal",
+    date: "a month ago",
+    text: "Got my RCT done from Dentelope. The doctors are friendly and the treatment was painless. Highly recommend this clinic in Whitefield.",
+  },
+  {
+    name: "Praveen R",
     init: "PR",
     rating: 5,
-    treatment: "Smile Makeover",
-    date: "Jun 2025",
-    text: "Best dental experience I've had in Bengaluru. Dr. Sneha was thorough with the consultation \u2014 no rushed explanations, no upselling. My veneers look completely natural. Zero pain throughout.",
+    treatment: "Surgical Extraction",
+    date: "a month ago",
+    text: "Surgical extraction done at Dentelope Clinic: skilled team, clean facility, smooth recovery — very satisfied.",
+  },
+  {
+    name: "Kamta",
+    init: "K",
+    rating: 5,
+    treatment: "Root Canal",
+    date: "2 weeks ago",
+    text: "Had come here with bad tooth pain and got my root canal done. Treatment went smoothly and pain is better now.",
+  },
+  {
+    name: "Chootu Kushawaha",
+    init: "CK",
+    rating: 5,
+    treatment: "General Dentistry",
+    date: "a month ago",
+    text: "Highly recommended this clinic in Whitefield. The doctors are well experienced and take utmost care during and after the procedure.",
   },
   {
     name: "Suresh Kumar",
@@ -454,7 +486,7 @@ const FAQS = [
   },
   {
     q: "How hygienic is the clinic?",
-    a: "NABH-compliant autoclave sterilisation, single-use consumables and quarterly independent audits. Strict infection-control protocols throughout.",
+    a: "Hospital-grade sterilisation, single-use consumables and strict infection-control protocols throughout.",
   },
   {
     q: "Do you treat children?",
@@ -1198,10 +1230,10 @@ export default function Home() {
                   className="text-3xl font-extrabold"
                   style={{ color: OR, fontFamily: "Poppins, sans-serif" }}
                 >
-                  ISO 9001
+                  Quality Care
                 </p>
                 <p className="text-xs text-gray-500 font-medium mt-0.5">
-                  Certified Clinic
+                  Clinical Standards
                 </p>
               </div>
             </div>
@@ -1238,8 +1270,8 @@ export default function Home() {
                 {[
                   { v: "2,000+", l: "Patients Treated" },
                   { v: "3+", l: "Specialist Doctors" },
-                  { v: "ISO 9001", l: "Certified Clinic" },
-                  { v: "NABH", l: "Compliant Sterilisation" },
+                  { v: "Quality Care", l: "Clinical Standards" },
+                  { v: "Sterile Care", l: "Hospital Hygiene" },
                 ].map(({ v, l }) => (
                   <div
                     key={l}
@@ -1483,7 +1515,9 @@ export default function Home() {
           </div>
           <div className="text-center mt-8">
             <a
-              href="#"
+              href="https://www.google.com/search?sca_esv=403cd90e1945cb77&sxsrf=APpeQnutHj6aUWLhse4WGFlVIZjhX--_gQ:1789137049675&q=dentelope+bangalore&nfpr=1&sa=X&ved=2ahUKEwjS8LLy3uaWAxUtamwGHWO0PUEQvgUoAXoECBMQAg&biw=1912&bih=948&dpr=1#lrd=0x3bae13ab3bc55ce3:0xe846e432bcdb0036,1,,,,"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm font-bold border px-6 py-3 rounded-xl transition hover:bg-orange-50"
               style={{
                 color: OR,
@@ -1606,40 +1640,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* insurance partners */}
-      <div
-        className="py-10 border-y border-gray-100"
-        style={{ background: WHITE }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <p className="text-center text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">
-            Insurance & Payment Partners
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            {[
-              "Star Health",
-              "HDFC Ergo",
-              "Bajaj Allianz",
-              "Aditya Birla Health",
-              "Care Health",
-              "New India Assurance",
-              "United India",
-              "National Insurance",
-            ].map((p) => (
-              <div
-                key={p}
-                className="px-5 py-2.5 rounded-xl border border-gray-200 text-sm font-semibold text-gray-500 hover:border-orange-300 hover:text-orange-500 transition-all cursor-pointer bg-white"
-              >
-                {p}
-              </div>
-            ))}
-          </div>
-          <p className="text-center text-xs text-gray-400 mt-4">
-            + All major credit cards · 0% EMI · Cashless TPA accepted
-          </p>
-        </div>
-      </div>
 
       {/* blog */}
       <section id="blog" className="py-20" style={{ background: CREAM2 }}>

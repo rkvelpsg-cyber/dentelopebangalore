@@ -258,8 +258,8 @@ const WHY = [
   },
   {
     icon: "🏅",
-    title: "ISO 9001 Certified",
-    desc: "NABH-compliant sterilisation, quarterly independent safety audits.",
+    title: "Quality Care",
+    desc: "Clinical-grade sterilisation and strict safety protocols.",
   },
   {
     icon: "📸",
@@ -374,7 +374,7 @@ const FAQS = [
   },
   {
     q: "How hygienic is the clinic?",
-    a: "NABH-compliant autoclave sterilisation, single-use consumables and quarterly independent audits. Strict infection-control protocols throughout.",
+    a: "Hospital-grade sterilisation, single-use consumables and strict infection-control protocols throughout.",
   },
   {
     q: "Do you treat children?",
@@ -685,7 +685,7 @@ function FeaturesStrip() {
       sub: "Computer-controlled anaesthesia",
     },
     { icon: "🎓", label: "MDS Specialists", sub: "Post-graduate doctors only" },
-    { icon: "🏅", label: "ISO 9001 Certified", sub: "NABH-compliant clinic" },
+    { icon: "🏅", label: "Quality Care", sub: "Safe clinic standards" },
     { icon: "💳", label: "0% EMI", sub: "Up to 24 months, zero cost" },
     { icon: "🆓", label: "Free Consultation", sub: "First visit at no charge" },
     { icon: "📋", label: "Transparent Pricing", sub: "No hidden fees, ever" },
@@ -1206,11 +1206,11 @@ export default function App() {
             {/* trust chips */}
             <div className="flex flex-wrap gap-2">
               {[
-                "ISO 9001 Certified",
+                "Quality Care",
                 "Pain-Free Tech",
                 "0% EMI",
                 "Free Consultation",
-                "NABH Compliant",
+                "Safe Clinical Standards",
               ].map((chip) => (
                 <span
                   key={chip}

@@ -39,7 +39,7 @@ const slides = [
     alt: "Dental implant model showing tooth structure",
     headline: "Permanent\nDental Implants",
     sub: "Restore missing teeth with titanium implants that look, feel, and function just like natural teeth — for life.",
-    cta: "Get a Free Assessment",
+    cta: "Book An Appontment",
     ctaSecondary: "How It Works",
     treatmentHref: "/treatments/dental-implants",
     align: "left",

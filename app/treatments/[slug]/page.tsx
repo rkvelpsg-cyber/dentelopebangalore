@@ -545,7 +545,7 @@ export default function TreatmentPage({
                   {treatment.label}
                 </p>
                 <p className="text-xs text-gray-500">
-                  MDS Specialists · ISO 9001 Certified
+                  MDS Specialists · Clinical Standards
                 </p>
               </div>
             </div>
@@ -780,7 +780,7 @@ export default function TreatmentPage({
             {[
               "Pain-free procedures with advanced anaesthesia",
               "MDS specialists — no juniors or trainees",
-              "ISO 9001 & NABH-compliant sterilisation",
+              "Clinical-grade sterilisation standards",
               "3D digital X-rays & AI diagnostics",
               "2,000+ happy patients in Whitefield",
             ].map((p) => (
