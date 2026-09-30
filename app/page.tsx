@@ -1269,7 +1269,7 @@ export default function Home() {
               <div className="grid grid-cols-2 gap-4">
                 {[
                   { v: "2,000+", l: "Patients Treated" },
-                  { v: "3+", l: "Specialist Doctors" },
+                  { v: "20+", l: "Specialist Doctors" },
                   { v: "Quality Care", l: "Clinical Standards" },
                   { v: "Sterile Care", l: "Hospital Hygiene" },
                 ].map(({ v, l }) => (
