@@ -31,6 +31,7 @@ import {
   BadgeCheck,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { ImageWithFallback } from "@/components/ImageWithFallback";
 import {
   LABEL_TO_SLUG,
@@ -157,10 +158,15 @@ const NAV_LINKS = [
       "Implant Dentures",
     ],
   },
-  { label: "Patient Speaks", href: "#patient-speaks", sub: [] },
+  { label: "Our Clinic", href: "#clinic-gallery", sub: [] },
   { label: "Dental Blog", href: "#blog", sub: [] },
   { label: "Our Doctors", href: "#doctors", sub: [] },
 ];
+
+const CLINIC_PHOTOS = Array.from({ length: 14 }, (_, index) => ({
+  src: `/images/clinic_${index + 2}.jpeg`,
+  alt: `Dentelope clinic photo ${index + 2}`,
+}));
 
 const TREATMENTS = [
   {
@@ -980,6 +986,8 @@ function SearchBox() {
 }
 
 export default function Home() {
+  const clinicGalleryRef = useRef<HTMLDivElement>(null);
+  const [clinicGalleryPaused, setClinicGalleryPaused] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openNav, setOpenNav] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -988,6 +996,66 @@ export default function Home() {
   const [reviewVisibleCount, setReviewVisibleCount] = useState(3);
   const [reviewsPaused, setReviewsPaused] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const scrollClinicGallery = (direction: -1 | 1) => {
+    const track = clinicGalleryRef.current;
+    const firstSlide = track?.querySelector<HTMLElement>("[data-clinic-slide]");
+    if (!track || !firstSlide) return;
+
+    const distance = firstSlide.getBoundingClientRect().width + 20;
+    const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? "instant"
+      : "smooth";
+    track.scrollBy({ left: direction * distance, behavior });
+  };
+
+  useEffect(() => {
+    const track = clinicGalleryRef.current;
+    if (
+      !track ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+
+    let timer: number | undefined;
+    const stopAutoplay = () => {
+      if (timer !== undefined) {
+        window.clearInterval(timer);
+        timer = undefined;
+      }
+    };
+    const advance = () => {
+      if (document.visibilityState !== "visible") return;
+
+      const firstSlide = track.querySelector<HTMLElement>("[data-clinic-slide]");
+      if (!firstSlide) return;
+
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      if (track.scrollLeft >= maxScroll - 8) {
+        track.scrollTo({ left: 0, behavior: "instant" });
+        return;
+      }
+
+      const gap = Number.parseFloat(window.getComputedStyle(track).columnGap);
+      track.scrollBy({
+        left: firstSlide.getBoundingClientRect().width + (Number.isNaN(gap) ? 0 : gap),
+        behavior: "smooth",
+      });
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      stopAutoplay();
+      if (entry.isIntersecting && !clinicGalleryPaused) {
+        timer = window.setInterval(advance, 4000);
+      }
+    });
+
+    observer.observe(track);
+    return () => {
+      stopAutoplay();
+      observer.disconnect();
+    };
+  }, [clinicGalleryPaused]);
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 60);
@@ -1531,112 +1599,86 @@ export default function Home() {
         </div>
       </section>
 
-      {/* patient speaks */}
+      {/* clinic gallery */}
       <section
-        id="patient-speaks"
+        id="clinic-gallery"
         className="py-20"
         style={{ background: WHITE }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <OrangePill>Video Testimonials</OrangePill>
-            <h2
-              className="mt-4 text-4xl font-extrabold text-gray-900"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
-              Patient <span style={{ color: OR }}>Speaks</span>
-            </h2>
-            <p className="mt-3 text-gray-500 text-lg">
-              Hear what our happy patients have to say about their treatments at
-              Dentelope
-            </p>
+        <div
+          className="max-w-7xl mx-auto px-4 sm:px-6"
+          onMouseEnter={() => setClinicGalleryPaused(true)}
+          onMouseLeave={() => setClinicGalleryPaused(false)}
+          onTouchStart={() => setClinicGalleryPaused(true)}
+          onTouchEnd={() => setClinicGalleryPaused(false)}
+          onFocusCapture={() => setClinicGalleryPaused(true)}
+          onBlurCapture={(event) => {
+            const nextTarget = event.relatedTarget;
+            if (
+              !(nextTarget instanceof Node) ||
+              !event.currentTarget.contains(nextTarget)
+            ) {
+              setClinicGalleryPaused(false);
+            }
+          }}
+        >
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
+            <div>
+              <OrangePill>Our Clinic</OrangePill>
+              <h2
+                className="mt-4 text-4xl font-extrabold text-gray-900"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                A closer look at <span style={{ color: OR }}>Dentelope</span>
+              </h2>
+              <p className="mt-3 text-gray-500 text-lg">
+                Explore our clinic and the spaces where we care for your smile.
+              </p>
+            </div>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => scrollClinicGallery(-1)}
+                aria-label="Previous clinic photos"
+                className="w-11 h-11 rounded-full border border-gray-200 flex items-center justify-center text-gray-600 hover:border-orange-400 hover:text-orange-500 transition"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollClinicGallery(1)}
+                aria-label="Next clinic photos"
+                className="w-11 h-11 rounded-full border border-gray-200 flex items-center justify-center text-gray-600 hover:border-orange-400 hover:text-orange-500 transition"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
-            {[
-              {
-                name: "Priya Sharma",
-                city: "Bengaluru",
-                treatment: "Teeth Whitening",
-                img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=560&fit=crop&auto=format",
-              },
-              {
-                name: "Rahul Kumar",
-                city: "Whitefield",
-                treatment: "Dental Implants",
-                img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=560&fit=crop&auto=format",
-              },
-              {
-                name: "Meera Nair",
-                city: "Bengaluru",
-                treatment: "Braces / Aligners",
-                img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=560&fit=crop&auto=format",
-              },
-              {
-                name: "Arjun Reddy",
-                city: "Whitefield",
-                treatment: "Root Canal (RCT)",
-                img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=560&fit=crop&auto=format",
-              },
-              {
-                name: "Kavya Patel",
-                city: "Bengaluru",
-                treatment: "Smile Makeover",
-                img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&h=560&fit=crop&auto=format",
-              },
-            ].map(({ name, city, treatment, img }) => (
-              <div key={name} className="flex flex-col gap-3">
-                <div className="relative rounded-2xl overflow-hidden shadow-md group cursor-pointer">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={img}
-                    alt={name}
-                    className="w-full aspect-[5/7] object-cover transition-transform duration-300 group-hover:scale-105"
+          <div
+            ref={clinicGalleryRef}
+            className="clinic-gallery-track flex gap-5 overflow-x-auto snap-x snap-mandatory pb-3"
+            role="region"
+            aria-label="Dentelope clinic photos"
+            tabIndex={0}
+          >
+            {CLINIC_PHOTOS.map((photo) => (
+              <article
+                key={photo.src}
+                data-clinic-slide
+                className="shrink-0 snap-start overflow-hidden rounded-2xl bg-gray-100 border border-gray-100 shadow-sm"
+                style={{ width: "min(86vw, 380px)" }}
+              >
+                <div className="relative aspect-[4/3]">
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    sizes="(min-width: 1280px) 380px, (min-width: 640px) 50vw, 86vw"
+                    className="object-cover transition-transform duration-500 hover:scale-105"
                   />
-                  {/* dark gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  {/* play button */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                      <svg
-                        className="w-5 h-5 translate-x-0.5"
-                        viewBox="0 0 24 24"
-                        fill={OR}
-                      >
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    </div>
-                  </div>
-                  {/* name badge */}
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <p className="text-white font-bold text-xs uppercase tracking-wider drop-shadow">
-                      {name}
-                    </p>
-                    <p className="text-white/70 text-[10px] uppercase tracking-widest">
-                      Happy Patient &middot; {treatment}
-                    </p>
-                  </div>
                 </div>
-                <div>
-                  <p className="font-semibold text-gray-900 text-sm">{name}</p>
-                  <p className="text-gray-400 text-xs">{city}</p>
-                  <p
-                    className="text-xs font-semibold mt-0.5"
-                    style={{ color: OR }}
-                  >
-                    {treatment}
-                  </p>
-                </div>
-              </div>
+              </article>
             ))}
-          </div>
-          <div className="flex justify-center mt-10">
-            <a
-              href="#"
-              className="flex items-center gap-2 text-sm font-bold border-b-2 pb-0.5 transition hover:opacity-70"
-              style={{ color: DARK, borderColor: DARK }}
-            >
-              View More <ArrowRight className="w-4 h-4" />
-            </a>
           </div>
         </div>
       </section>

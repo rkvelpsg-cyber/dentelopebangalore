@@ -56,7 +56,7 @@ const NAV_LINKS = [
       "Implant Dentures",
     ],
   },
-  { label: "Patient Speaks", sub: [] },
+  { label: "Our Clinic", sub: [] },
   { label: "Dental Blog", sub: [] },
   { label: "Our Doctors", sub: [] },
 ];
