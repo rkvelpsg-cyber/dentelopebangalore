@@ -34,9 +34,10 @@ const C = {
 };
 
 const NAV_LINKS = [
-  { label: "About", sub: [] },
+  { label: "About", href: "/#about", sub: [] },
   {
     label: "Treatments",
+    href: "/#treatments",
     sub: [
       "Teeth Cleaning",
       "Teeth Whitening",
@@ -56,9 +57,9 @@ const NAV_LINKS = [
       "Implant Dentures",
     ],
   },
-  { label: "Our Clinic", sub: [] },
-  { label: "Dental Blog", sub: [] },
-  { label: "Our Doctors", sub: [] },
+  { label: "Our Clinic", href: "/#clinic-gallery", sub: [] },
+  { label: "Dental Blog", href: "/#blog", sub: [] },
+  { label: "Our Doctors", href: "/#doctors", sub: [] },
 ];
 
 function IconInstagram({ className }: { className?: string }) {
@@ -315,13 +316,13 @@ export default function TreatmentPage({
             <img
               src="/dentelope.svg"
               alt="Dentelope logo"
-              className="h-16 w-auto"
+              className="h-12 w-auto sm:h-16"
             />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/dentelope_tagline.png"
               alt="Dentelope — Advanced Dental Care"
-              className="h-20 w-auto"
+              className="h-16 w-auto sm:h-20"
             />
           </Link>
           <nav className="hidden xl:flex items-center flex-1 text-sm font-medium text-gray-600 justify-center">
@@ -338,12 +339,19 @@ export default function TreatmentPage({
                 onMouseEnter={() => setOpenNav(n.label)}
                 onMouseLeave={() => setOpenNav(null)}
               >
-                <button className="flex items-center gap-1 px-3 py-2 rounded-lg hover:text-orange-500 hover:bg-orange-50 transition-colors whitespace-nowrap">
-                  {n.label}{" "}
-                  {n.sub.length > 0 && (
+                {n.sub.length > 0 ? (
+                  <button className="flex items-center gap-1 px-3 py-2 rounded-lg hover:text-orange-500 hover:bg-orange-50 transition-colors whitespace-nowrap">
+                    {n.label}{" "}
                     <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
-                  )}
-                </button>
+                  </button>
+                ) : (
+                  <Link
+                    href={n.href}
+                    className="flex items-center gap-1 px-3 py-2 rounded-lg hover:text-orange-500 hover:bg-orange-50 transition-colors whitespace-nowrap"
+                  >
+                    {n.label}
+                  </Link>
+                )}
                 {n.sub.length > 0 && openNav === n.label && (
                   <div className="absolute top-full left-0 bg-white border border-gray-100 rounded-2xl shadow-xl py-2 min-w-[200px] z-50">
                     {n.sub.map((s) => (
@@ -390,6 +398,8 @@ export default function TreatmentPage({
           <button
             className="xl:hidden ml-auto p-2 rounded-lg text-gray-600 hover:bg-gray-100"
             onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
           >
             {menuOpen ? (
               <X className="w-5 h-5" />
@@ -399,29 +409,44 @@ export default function TreatmentPage({
           </button>
         </div>
         {menuOpen && (
-          <div className="xl:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-1">
+          <div className="xl:hidden max-h-[calc(100dvh-88px)] overflow-y-auto bg-white border-t border-gray-100 px-4 py-4 space-y-1">
             <Link
               href="/#treatments"
               className="flex items-center gap-1.5 py-2.5 text-sm font-medium text-orange-500"
-              onClick={() => setMenuOpen(false)}
+              onClick={() => {
+                setMenuOpen(false);
+                setOpenNav(null);
+              }}
             >
               <ArrowLeft className="w-4 h-4" /> All Treatments
             </Link>
             {NAV_LINKS.map((n) => (
               <div key={n.label}>
-                <button
-                  onClick={() =>
-                    setOpenNav(openNav === n.label ? null : n.label)
-                  }
-                  className="w-full flex items-center justify-between py-2.5 text-sm font-medium text-gray-700 hover:text-orange-500"
-                >
-                  {n.label}
-                  {n.sub.length > 0 && (
+                {n.sub.length > 0 ? (
+                  <button
+                    onClick={() =>
+                      setOpenNav(openNav === n.label ? null : n.label)
+                    }
+                    aria-expanded={openNav === n.label}
+                    className="w-full flex items-center justify-between py-2.5 text-sm font-medium text-gray-700 hover:text-orange-500"
+                  >
+                    {n.label}
                     <ChevronDown
                       className={`w-4 h-4 text-gray-400 transition-transform ${openNav === n.label ? "rotate-180" : ""}`}
                     />
-                  )}
-                </button>
+                  </button>
+                ) : (
+                  <Link
+                    href={n.href}
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setOpenNav(null);
+                    }}
+                    className="w-full flex items-center justify-between py-2.5 text-sm font-medium text-gray-700 hover:text-orange-500"
+                  >
+                    {n.label}
+                  </Link>
+                )}
                 {openNav === n.label &&
                   n.sub.map((s) => (
                     <Link

@@ -1107,13 +1107,13 @@ export default function Home() {
             <img
               src="/dentelope.svg"
               alt="Dentelope logo"
-              className="h-16 w-auto"
+              className="h-12 w-auto sm:h-16"
             />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/dentelope_tagline.png"
               alt="Dentelope — Advanced Dental Care"
-              className="h-20 w-auto"
+              className="h-16 w-auto sm:h-20"
             />
           </a>
           <nav className="hidden xl:flex items-center flex-1 text-sm font-medium text-gray-600 justify-center">
@@ -1184,6 +1184,8 @@ export default function Home() {
           <button
             className="xl:hidden ml-auto p-2 rounded-lg text-gray-600 hover:bg-gray-100"
             onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
           >
             {menuOpen ? (
               <X className="w-5 h-5" />
@@ -1193,22 +1195,34 @@ export default function Home() {
           </button>
         </div>
         {menuOpen && (
-          <div className="xl:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-1">
+          <div className="xl:hidden max-h-[calc(100dvh-88px)] overflow-y-auto bg-white border-t border-gray-100 px-4 py-4 space-y-1">
             {NAV_LINKS.map((n) => (
               <div key={n.label}>
-                <button
-                  onClick={() =>
-                    setOpenNav(openNav === n.label ? null : n.label)
-                  }
-                  className="w-full flex items-center justify-between py-2.5 text-sm font-medium text-gray-700 hover:text-orange-500"
-                >
-                  {n.label}
-                  {n.sub.length > 0 && (
+                {n.sub.length > 0 ? (
+                  <button
+                    onClick={() =>
+                      setOpenNav(openNav === n.label ? null : n.label)
+                    }
+                    aria-expanded={openNav === n.label}
+                    className="w-full flex items-center justify-between py-2.5 text-sm font-medium text-gray-700 hover:text-orange-500"
+                  >
+                    {n.label}
                     <ChevronDown
                       className={`w-4 h-4 text-gray-400 transition-transform ${openNav === n.label ? "rotate-180" : ""}`}
                     />
-                  )}
-                </button>
+                  </button>
+                ) : (
+                  <a
+                    href={n.href}
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setOpenNav(null);
+                    }}
+                    className="w-full flex items-center justify-between py-2.5 text-sm font-medium text-gray-700 hover:text-orange-500"
+                  >
+                    {n.label}
+                  </a>
+                )}
                 {openNav === n.label &&
                   n.sub.map((s) => (
                     <Link
@@ -1263,7 +1277,11 @@ export default function Home() {
       <TreatmentsCarousel />
 
       {/* about */}
-      <section id="about" className="py-20" style={{ background: WHITE }}>
+      <section
+        id="about"
+        className="scroll-mt-[88px] py-20"
+        style={{ background: WHITE }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-14 items-center">
             {/* image side */}
@@ -1462,7 +1480,11 @@ export default function Home() {
       </section>
 
       {/* doctors */}
-      <section id="doctors" className="py-20" style={{ background: WHITE }}>
+      <section
+        id="doctors"
+        className="scroll-mt-[88px] py-20"
+        style={{ background: WHITE }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
             <OrangePill>Expert Team</OrangePill>
@@ -1595,7 +1617,7 @@ export default function Home() {
       {/* clinic gallery */}
       <section
         id="clinic-gallery"
-        className="py-20"
+        className="scroll-mt-[88px] py-20"
         style={{ background: WHITE }}
       >
         <div
@@ -1677,7 +1699,11 @@ export default function Home() {
       </section>
 
       {/* blog */}
-      <section id="blog" className="py-20" style={{ background: CREAM2 }}>
+      <section
+        id="blog"
+        className="scroll-mt-[88px] py-20"
+        style={{ background: CREAM2 }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-12">
             <div>

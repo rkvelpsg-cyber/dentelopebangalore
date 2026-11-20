@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import BackToTop from "@/components/BackToTop";
 import "./globals.css";
 
 const siteUrl =
@@ -117,6 +118,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         {children}
+        <BackToTop />
       </body>
     </html>
   );
