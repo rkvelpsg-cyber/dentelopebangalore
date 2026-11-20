@@ -238,7 +238,7 @@ export const TREATMENT_DATA: TreatmentData[] = [
       },
       {
         q: "What is the cost of the full implant?",
-        a: "Our all-inclusive implant package (titanium post + abutment + zirconia crown) starts at ₹18,000. EMI from ₹900/month available.",
+        a: "Our all-inclusive implant package (titanium post + abutment + zirconia crown) starts at ₹18,000.",
       },
     ],
     popular: true,

@@ -479,10 +479,6 @@ const FAQS = [
     a: "Yes. We're empanelled with Star Health, HDFC Ergo, Bajaj Allianz, Aditya Birla Health and most corporate TPA cashless networks. Our team handles all paperwork.",
   },
   {
-    q: "What EMI options are available?",
-    a: "0% EMI for 3\u201324 months via HDFC Flexipay, BajajFinserv, ZestMoney and select credit cards. Available for treatments above \u20b910,000.",
-  },
-  {
     q: "How do I book an appointment?",
     a: "Use the form on this page, call/WhatsApp +91-6364609627, or walk in. Same-day slots available for most non-surgical treatments.",
   },
@@ -1272,37 +1268,34 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-14 items-center">
             {/* image side */}
             <div className="relative">
-              <div className="rounded-3xl overflow-hidden shadow-xl">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="https://images.unsplash.com/photo-1629909615184-74f495363b67?w=800&h=700&fit=crop&auto=format"
-                  alt="Dentelope Clinic Interior"
-                  className="w-full h-[480px] object-cover"
-                />
-              </div>
-              {/* floating stat card */}
-              <div className="absolute -bottom-5 -right-5 bg-white rounded-2xl px-6 py-4 shadow-xl border border-orange-50 hidden sm:block">
-                <p
-                  className="text-3xl font-extrabold"
-                  style={{ color: OR, fontFamily: "Poppins, sans-serif" }}
-                >
-                  2,000+
-                </p>
-                <p className="text-xs text-gray-500 font-medium mt-0.5">
-                  Happy Patients
-                </p>
-              </div>
-              {/* floating patients card */}
-              <div className="absolute -top-5 -left-5 bg-white rounded-2xl px-6 py-4 shadow-xl border border-orange-50 hidden sm:block">
-                <p
-                  className="text-3xl font-extrabold"
-                  style={{ color: OR, fontFamily: "Poppins, sans-serif" }}
-                >
-                  Quality Care
-                </p>
-                <p className="text-xs text-gray-500 font-medium mt-0.5">
-                  Clinical Standards
-                </p>
+              <div className="grid h-[360px] grid-cols-2 grid-rows-[3fr_2fr] gap-2 overflow-hidden rounded-3xl shadow-xl sm:h-[440px] lg:h-[480px]">
+                <div className="relative col-span-2 min-h-0">
+                  <Image
+                    src="/images/clinic_9.jpeg"
+                    alt="Dental treatment room and chair at Dentelope"
+                    fill
+                    sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), (max-width: 1279px) calc((100vw - 104px) / 2), 588px"
+                    className="object-cover object-[50%_60%]"
+                  />
+                </div>
+                <div className="relative min-h-0">
+                  <Image
+                    src="/images/clinic_14.jpeg"
+                    alt="Dental professional working at the Dentelope clinic desk"
+                    fill
+                    sizes="(max-width: 639px) calc((100vw - 40px) / 2), (max-width: 1023px) calc((100vw - 56px) / 2), (max-width: 1279px) calc((100vw - 120px) / 4), 290px"
+                    className="object-cover object-[48%_35%]"
+                  />
+                </div>
+                <div className="relative min-h-0">
+                  <Image
+                    src="/images/clinic_15.jpeg"
+                    alt="Dental professional seated at the Dentelope clinic desk"
+                    fill
+                    sizes="(max-width: 639px) calc((100vw - 40px) / 2), (max-width: 1023px) calc((100vw - 56px) / 2), (max-width: 1279px) calc((100vw - 120px) / 4), 290px"
+                    className="object-cover object-[48%_35%]"
+                  />
+                </div>
               </div>
             </div>
 

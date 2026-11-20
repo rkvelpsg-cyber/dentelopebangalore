@@ -636,47 +636,6 @@ export default function TreatmentPage({
             </div>
           </section>
 
-          {/* pricing */}
-          <section
-            className="rounded-2xl p-6 sm:p-8"
-            style={{
-              background: `linear-gradient(135deg, #fff8f2 0%, ${CREAM} 100%)`,
-              border: `1px solid ${OR}25`,
-            }}
-          >
-            <h2
-              className="text-2xl font-extrabold text-gray-900 mb-2"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
-              Pricing &amp; <span style={{ color: OR }}>EMI Options</span>
-            </h2>
-            <p className="text-gray-500 text-sm mb-5">
-              All prices are indicative. A detailed quote is provided after your
-              free consultation — no surprises.
-            </p>
-            <div className="flex items-center gap-4 flex-wrap">
-              <div className="space-y-1.5">
-                {[
-                  "0% EMI available for 3–24 months",
-                  "HDFC, Bajaj Finserv, ZestMoney accepted",
-                  "All major insurance plans accepted",
-                  "Transparent itemised invoice",
-                ].map((p) => (
-                  <div
-                    key={p}
-                    className="flex items-center gap-2 text-sm text-gray-700"
-                  >
-                    <CheckCircle
-                      className="w-4 h-4 shrink-0"
-                      style={{ color: OR }}
-                    />
-                    {p}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
           {/* FAQs */}
           <section id="faq">
             <h2
@@ -936,7 +895,6 @@ export default function TreatmentPage({
                 "Patient Testimonials",
                 "Online Payments",
                 "Membership Plans",
-                "0% EMI Options",
               ].map((l) => (
                 <li key={l}>
                   <a href="#" className="hover:text-white transition-colors">
